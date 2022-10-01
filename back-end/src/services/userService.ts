@@ -46,7 +46,18 @@ async function loginUser (userInfo: IUserLogin) {
     
 }
 
+async function findUserById(id: number) {
+    const user = await userRepository.findById(id);
+    if (!user) {
+        throw {type: "not_found", message: "User do not exist!"}
+    };
+  
+    return user;
+}
+
+
 export const userService = {
     createUser,
-    loginUser
+    loginUser,
+    findUserById
 }
