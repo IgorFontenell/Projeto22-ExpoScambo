@@ -17,6 +17,36 @@ model Users {
   password String 
   cpf String @unique
   photo String
+  score Int @default(0)
+
+  Posts Posts[]
 
   @@map("users")
 }
+
+model Category {
+  id Int @id @default(autoincrement())
+  name String @unique
+
+  Posts Posts[]
+
+  @@map("category")
+}
+
+model Posts {
+  id Int @id @default(autoincrement())
+  userId Int
+  description String
+  categoryId Int 
+  budget Int 
+  travelAddress String 
+  arrivalDay DateTime
+  departureDay DateTime
+
+  user  Users @relation(fields: [userId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@map("posts")
+}
+
+
