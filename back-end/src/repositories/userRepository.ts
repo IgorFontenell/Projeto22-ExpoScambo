@@ -12,12 +12,21 @@ async function createUser (userInfo: IUserRegister, passwordEncrypted: string) {
     })
 }
 
-async function getUserByEmail (email: string, cpf: string) {
+async function getUserByCpf (cpf: string) {
     
     return await client.users.findUnique({
         where: {
-            email: email,
             cpf: cpf
+        }
+    })
+}
+
+async function getUserByEmail (email: string) {
+    
+    return await client.users.findUnique({
+        where: {
+            email: email
+            
         }
     })
 }
@@ -32,6 +41,7 @@ async function getUserByEmail (email: string, cpf: string) {
 export const userRepository = {
     createUser,
     getUserByEmail,
-    findById
+    findById,
+    getUserByCpf
 
 }
