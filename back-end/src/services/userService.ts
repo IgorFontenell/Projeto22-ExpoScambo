@@ -1,7 +1,7 @@
 import { validateSchemas } from "../middlewares/schemaValidator";
 import { userRepository }  from "../repositories/userRepository";
 import { userSchema } from "../schemas/userSchemas";
-import { IUserRegister, IUserLogin, TypeUserInfo} from '../types/userTypes';
+import { IUserRegister, IUserLogin, IUserDB} from '../types/userTypes';
 import { decrypt, encrypt } from "../utils/criptUtils";
 import jwt from 'jsonwebtoken';
 
@@ -11,7 +11,7 @@ async function createUser (userInfo: IUserRegister) {
 
     await validateSchemas(userSchema.userRegisterSchema, userInfo); // Validating the stucture of the information send by the front.
 
-    let user: TypeUserInfo = await userRepository.getUserByEmail(userInfo.email); // Looking for the user by his email.
+    let user: IUserDB | null = await userRepository.getUserByEmail(userInfo.email); // Looking for the user by his email.
     
     if(user) {
         throw {type: "not_acceptable", message: "Email already registered!"}
@@ -26,6 +26,27 @@ async function createUser (userInfo: IUserRegister) {
     await userRepository.createUser(userInfo, passwordEncrypted); // Creating the user in the DB.
 }
 
+async function loginUser (userInfo: IUserLogin) {
+
+    await validateSchemas(userSchema.userLoginSchema, userInfo); // Validating the stucture of the information send by the front.
+    const userDB: IUserDB | null = await userRepository.getUserByEmail(userInfo.email); // Looking for the user by his email.
+    
+    if(!userDB) {
+        throw {type: "not_found", message: "User do not exist!"}
+    }
+    
+    const passwordDecrypted: string = decrypt(userDB.password); // Decypting the password got from the DB.
+    if(userInfo.password !== passwordDecrypted) { // Checking if the password from the DB is the same send by the front.
+        throw {type: "unauthorized", message: "Incorrect password!"}
+    }
+    
+    const token : string = jwt.sign({ userId: userDB.id }, process.env.JWT_SECRET as string) // Creating the token.
+    
+    return token;
+    
+}
+
 export const userService = {
-    createUser
+    createUser,
+    loginUser
 }
