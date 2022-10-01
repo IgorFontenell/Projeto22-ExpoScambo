@@ -11,8 +11,8 @@ export async function registerController (request: Request, response: Response) 
 export async function loginController (request: Request, response: Response) {
 
     const userInfo: IUserLogin = request.body;
-    //const token = await userService.loginUser(userInfo);
+    const token = await userService.loginUser(userInfo);
 
-   // response.status(200).send(token);
+   response.status(200).send(token);
 
 }
