@@ -42,7 +42,7 @@ async function loginUser (userInfo: IUserLogin) {
     
     const token : string = jwt.sign({ userId: userDB.id }, process.env.JWT_SECRET as string) // Creating the token.
     
-    return token;
+    return token; //Sending the token.
     
 }
 
