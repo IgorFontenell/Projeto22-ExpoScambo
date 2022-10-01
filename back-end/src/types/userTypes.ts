@@ -11,4 +11,4 @@ export interface IUserLogin {
     password: string;
 }
 
-export type TypeUserInfo = Omit<IUserRegister, 'confirmPassword'>
+export type TypeUserInfo = Omit<IUserRegister, 'confirmPassword'> | null
