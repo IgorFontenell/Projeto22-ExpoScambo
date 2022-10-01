@@ -4,6 +4,7 @@ import { IUserRegister, IUserLogin } from '../types/userTypes';
 async function createUser (userInfo: IUserRegister, passwordEncrypted: string) {
     await client.users.create({
         data: {
+            name: userInfo.name,
             email: userInfo.email,
             password: passwordEncrypted,
             cpf: userInfo.cpf,
