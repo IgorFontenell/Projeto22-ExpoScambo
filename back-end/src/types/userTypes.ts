@@ -12,4 +12,11 @@ export interface IUserLogin {
     password: string;
 }
 
-export type TypeUserInfo = Omit<IUserRegister, 'confirmPassword'> | null
+export interface IUserDB {
+    id: Number;
+    name: string;
+    email: string;
+    password: string;
+    cpf: string;
+    photo: string;
+}
