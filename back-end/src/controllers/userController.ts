@@ -7,3 +7,12 @@ export async function registerController (request: Request, response: Response) 
     await userService.createUser(userInfo);
     response.status(201).send("User created sucessfuly!");
 }
+
+export async function loginController (request: Request, response: Response) {
+
+    const userInfo: IUserLogin = request.body;
+    //const token = await userService.loginUser(userInfo);
+
+   // response.status(200).send(token);
+
+}
