@@ -6,7 +6,6 @@ const userRegisterSchema = joi.object<IUserRegister>({
     password: joi.string().required(),
     confirmPassword: joi.string().valid(joi.ref('password')).required(),
     cpf: joi.string().required(),
-    address: joi.string().required(),
     photo: joi.string().uri().required()
 });
 

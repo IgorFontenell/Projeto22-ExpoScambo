@@ -3,7 +3,6 @@ export interface IUserRegister {
     password: string;
     confirmPassword: string;
     cpf: string;
-    address: string;
     photo: string;
 }
 
