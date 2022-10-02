@@ -3,7 +3,7 @@ export interface IPostDB {
     id: number;
     userId: number;
     description: string;
-    categoryId: number;
+    categoryName: string;
     budget: number;
     travelAddress: string;
     arrivalDay: string;
