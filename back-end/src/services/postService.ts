@@ -12,6 +12,7 @@ async function create (postInfo: TypeCreatePost) {
         throw {type: "not_found", message: "Category dosen't exist"}
     }
     
+    
 
 
 }
