@@ -31,8 +31,8 @@ model Posts {
   categoryName String 
   budget Int 
   travelAddress String 
-  arrivalDay DateTime
-  departureDay DateTime
+  arrivalDay String
+  departureDay String
 
   user  Users @relation(fields: [userId], references: [id])
   category Category @relation(fields: [categoryName], references: [name])

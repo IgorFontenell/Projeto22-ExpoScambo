@@ -27,6 +27,7 @@ export async function autenticateMiddleware(
     const tokenInfo: any = jwt.verify(token as string, JWT_SECRET as string) as { userId: number };
     
     const user = await userService.findUserById(tokenInfo.userId);
+    
     res.locals.user = user;
     
     next();

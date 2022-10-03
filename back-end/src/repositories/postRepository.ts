@@ -9,17 +9,24 @@ async function findCategoryByName (name: string) {
 }
 
 async function createPost(postInfo: TypeCreatePost, userId: number){
-    return await client.posts.create({
-        data: {
-            userId: userId,
-            description: postInfo.description,
-            categoryName: postInfo.categoryName,
-            budget: postInfo.budget,
-            travelAddress: postInfo.travelAddress,
-            arrivalDay: postInfo.arrivalDay,
-            departureDay: postInfo.departureDay,
-        }
-    });
+
+    try {
+        const teste =  await client.posts.create({
+            data: {
+                userId: userId,
+                description: postInfo.description,
+                categoryName: postInfo.categoryName,
+                budget: postInfo.budget,
+                travelAddress: postInfo.travelAddress,
+                arrivalDay: postInfo.arrivalDay,
+                departureDay: postInfo.departureDay,
+            }
+        });
+        return teste
+    } catch (error) {
+        console.log(error);
+    }
+    
 
 }
 

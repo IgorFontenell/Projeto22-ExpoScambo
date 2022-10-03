@@ -5,8 +5,8 @@ const postCreateSchema = joi.object({
     categoryName: joi.string().required(),
     budget: joi.number().min(0).required(),
     travelAddress: joi.string().required(),
-    arrivalDay: joi.date().required(),
-    departureDay: joi.date().required()
+    arrivalDay: joi.string().required(),
+    departureDay: joi.string().required()
 });
 
 

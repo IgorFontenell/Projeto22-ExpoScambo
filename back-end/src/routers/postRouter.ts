@@ -5,7 +5,7 @@ import { autenticateMiddleware } from "../middlewares/authMiddleware";
 
 const post = Router();
 
-post.post("/posts_create", autenticateMiddleware, createPostController);
+post.post("/posts/create", autenticateMiddleware, createPostController);
 post.post("/sign-in", );
 
 export default post;
