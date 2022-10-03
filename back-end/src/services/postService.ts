@@ -1,7 +1,7 @@
 import { validateSchemas } from '../middlewares/schemaValidator'
 import { postRepository } from '../repositories/postRepository';
 import { postSchema } from '../schemas/postSchemas'
-import { TypeCreatePost } from '../types/postTypes'
+import { TypeCreatePost, ICategoryDB } from '../types/postTypes'
 
 
 async function create (postInfo: TypeCreatePost, userId: number) {
@@ -17,7 +17,11 @@ async function create (postInfo: TypeCreatePost, userId: number) {
 }
 
 async function getCategoryPostsByName (category: string) {
+    if(category === "Recomendados") {
 
+    } else {
+        const categoryDB: ICategoryDB | null = await postRepository.findCategoryByName(category);
+    }
 }
 
 export const postService = {

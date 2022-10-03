@@ -10,6 +10,11 @@ export interface IPostDB {
     departureDay: string;
 }
 
+export interface ICategoryDB {
+    id: number;
+    name: string;
+}
+
 
 
 export type TypeCreatePost = Omit<IPostDB, "id" & "userId">
