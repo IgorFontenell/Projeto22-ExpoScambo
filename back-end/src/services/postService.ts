@@ -1,5 +1,6 @@
 import { validateSchemas } from '../middlewares/schemaValidator'
 import { postRepository } from '../repositories/postRepository';
+import { userRepository } from '../repositories/userRepository';
 import { postSchema } from '../schemas/postSchemas'
 import { TypeCreatePost, ICategoryDB, IPostDB } from '../types/postTypes'
 
@@ -33,8 +34,12 @@ async function getCategoryPostsByName (category: string) {
 }
 
 async function getPostByIdService (id: number) {
-    
-    const posts = await postRepository.findPostsByScore();
+    const postId = id;
+    const post = await postRepository.findPostById(id);
+    if(!post) {
+        throw {type: "not_found", message: "Post dosen't exist"}
+    }
+    const user = await userRepository.findById(post.userId);
     
 }
 

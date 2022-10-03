@@ -19,4 +19,5 @@ export interface IUserDB {
     password: string;
     cpf: string;
     photo: string;
+    score: number;
 }

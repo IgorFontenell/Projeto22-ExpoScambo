@@ -51,12 +51,22 @@ async function findPostsByScore () {
     } catch (error){
         throw {type: "server_error", message: error}
     }
-    
+}
+
+async function findPostById (postId: number) {
+    try {
+        return await client.posts.findUnique({
+            where: { id: postId }
+        });
+    } catch (error){
+        throw {type: "server_error", message: error}
+    }
 }
 
 export const postRepository = {
     findCategoryByName,
     createPost,
     findPostsByCategory,
-    findPostsByScore
+    findPostsByScore,
+    findPostById
 }
