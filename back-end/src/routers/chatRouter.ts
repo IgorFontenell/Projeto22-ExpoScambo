@@ -3,7 +3,7 @@ import { Router } from "express";
 
 const chat = Router();
 
-chat.post("/sign-up", );
-chat.post("/sign-in", );
+chat.get("/chat/all", );
+chat.get("/chat/messages/:destinyId", );
 
 export default chat;
