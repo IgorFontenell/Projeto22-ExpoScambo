@@ -20,7 +20,8 @@ model Users {
   score Int @default(0)
 
   Posts Posts[]
-
+  user Chat[] @relation("user")
+  buyer Chat[] @relation("buyer")
   @@map("users")
 }
 
@@ -47,4 +48,28 @@ model Category {
   Posts Posts[]
 
   @@map("category")
+}
+
+model Chat {
+  id Int @id @default(autoincrement())
+  courierId Int
+  buyerId Int
+
+
+  user  Users @relation("user", fields: [courierId], references: [id])
+  buyer  Users @relation("buyer", fields: [buyerId], references: [id])
+  @@map("chat")
+}
+
+model Messages {
+  id Int @id @default(autoincrement())
+  chatId Int
+  writerId Int
+  destinyId Int
+  message String
+  timeOfMessage String
+
+
+  
+  @@map("messages")
 }
