@@ -6,6 +6,6 @@ export async function getAllChatsController (request: Request, response: Respons
     const user = response.locals.user
     const allChats = await chatService.getAll(user.userId);
 
-    response.status(201).send("Post created sucessfully!");
+    response.status(200).send(allChats);
     
 }
