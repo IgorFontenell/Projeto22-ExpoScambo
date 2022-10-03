@@ -35,17 +35,30 @@ async function getCategoryPostsByName (category: string) {
 
 async function getPostByIdService (id: number) {
     const postId = id;
-    const post = await postRepository.findPostById(id);
+    const post = await postRepository.findPostById(postId);
     if(!post) {
         throw {type: "not_found", message: "Post dosen't exist"}
     }
+
     const user = await userRepository.findById(post.userId);
-    
+    if(!user) {
+        throw {type: "not_found", message: "Post owner not found"}
+    }
+    const postInfo = {
+        post: {...post},
+        user: {
+            id: user.id,
+            name: user.id,
+            photo: user.photo,
+            score: user.score
+        }
+    }
+    return postInfo;
 }
 
 export const postService = {
     create,
     getCategoryPostsByName,
-    getPostByIdService,
+    getPostByIdService
     
 }
