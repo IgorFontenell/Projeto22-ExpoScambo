@@ -16,6 +16,11 @@ async function create (postInfo: TypeCreatePost, userId: number) {
     return;
 }
 
+async function getCategoryPostsByName (category: string) {
+
+}
+
 export const postService = {
-    create
+    create,
+    getCategoryPostsByName
 }
