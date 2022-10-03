@@ -2,41 +2,59 @@ import { client } from "../config/connection";
 import { IUserRegister, IUserLogin } from '../types/userTypes';
 
 async function createUser (userInfo: IUserRegister, passwordEncrypted: string) {
-    await client.users.create({
-        data: {
-            name: userInfo.name,
-            email: userInfo.email,
-            password: passwordEncrypted,
-            cpf: userInfo.cpf,
-            photo: userInfo.photo
-        }
-    })
+    try {
+        await client.users.create({
+            data: {
+                name: userInfo.name,
+                email: userInfo.email,
+                password: passwordEncrypted,
+                cpf: userInfo.cpf,
+                photo: userInfo.photo
+            }
+        });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
+    
 }
 
 async function getUserByCpf (cpf: string) {
+
+    try {
+        return await client.users.findUnique({
+            where: {
+                cpf: cpf
+            }
+        })
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
     
-    return await client.users.findUnique({
-        where: {
-            cpf: cpf
-        }
-    })
+    
 }
 
 async function getUserByEmail (email: string) {
-    
-    return await client.users.findUnique({
-        where: {
-            email: email
-            
-        }
-    })
+    try {
+        return await client.users.findUnique({
+            where: {
+                email: email
+                
+            }
+        });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
 }
 
  async function findById (id: number) {
+    try {
+        return client.users.findUnique({
+            where: { id }
+          });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
     
-    return client.users.findUnique({
-        where: { id }
-      });
 }
 
 export const userRepository = {
