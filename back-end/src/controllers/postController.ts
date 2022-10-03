@@ -19,3 +19,9 @@ export async function getPostsByCategory(request: Request, response: Response) {
     const posts = await postService.getCategoryPostsByName(category);
     response.status(200).send(posts);
 }
+
+export async function getPostById(request: Request, response: Response) {
+    const postId: number = Number(request.params.id);
+    const post = await postService.getPostByIdService(postId);
+    response.status(200).send(post);
+}

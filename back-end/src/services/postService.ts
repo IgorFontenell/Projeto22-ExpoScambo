@@ -32,7 +32,15 @@ async function getCategoryPostsByName (category: string) {
     return posts;
 }
 
+async function getPostByIdService (id: number) {
+    
+    const posts = await postRepository.findPostsByScore();
+    
+}
+
 export const postService = {
     create,
-    getCategoryPostsByName
+    getCategoryPostsByName,
+    getPostByIdService,
+    
 }
