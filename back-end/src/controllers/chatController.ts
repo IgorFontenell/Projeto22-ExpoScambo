@@ -9,3 +9,11 @@ export async function getAllChatsController (request: Request, response: Respons
     response.status(200).send(allChats);
     
 }
+
+export async function getAllMessagesController (request: Request, response: Response) {
+    const user = response.locals.user
+    const allMessages = await chatService.getAllMessages(user.userId);
+
+    response.status(200).send(allMessages);
+    
+}
