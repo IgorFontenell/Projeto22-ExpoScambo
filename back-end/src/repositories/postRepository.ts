@@ -3,15 +3,20 @@ import { TypeCreatePost } from '../types/postTypes'
 
 
 async function findCategoryByName (name: string) {
-    return await client.category.findFirst({
-        where: { name }
-    });
+    try {
+        return await client.category.findFirst({
+            where: { name }
+        });
+    } catch (error){
+        throw {type: "server_error", message: error}
+    }
+    
 }
 
 async function createPost(postInfo: TypeCreatePost, userId: number){
 
     try {
-        const teste =  await client.posts.create({
+        return await client.posts.create({
             data: {
                 userId: userId,
                 description: postInfo.description,
@@ -22,15 +27,25 @@ async function createPost(postInfo: TypeCreatePost, userId: number){
                 departureDay: postInfo.departureDay,
             }
         });
-        return teste
+        
     } catch (error) {
-        console.log(error);
+        throw {type: "server_error", message: error}
+    }
+}
+
+async function findPostsByCategory (name: string) {
+    try {
+        return await client.posts.findMany({
+            where: { categoryName: name }
+        });
+    } catch (error){
+        throw {type: "server_error", message: error}
     }
     
-
 }
 
 export const postRepository = {
     findCategoryByName,
-    createPost
+    createPost,
+    findPostsByCategory
 }

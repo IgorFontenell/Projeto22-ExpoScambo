@@ -1,7 +1,7 @@
 import { validateSchemas } from '../middlewares/schemaValidator'
 import { postRepository } from '../repositories/postRepository';
 import { postSchema } from '../schemas/postSchemas'
-import { TypeCreatePost, ICategoryDB } from '../types/postTypes'
+import { TypeCreatePost, ICategoryDB, IPostDB } from '../types/postTypes'
 
 
 async function create (postInfo: TypeCreatePost, userId: number) {
@@ -21,6 +21,13 @@ async function getCategoryPostsByName (category: string) {
 
     } else {
         const categoryDB: ICategoryDB | null = await postRepository.findCategoryByName(category);
+        if (!categoryDB) {
+            throw {type: "not_found", message: "Category dosen't exist"}
+        }
+        const posts = await postRepository.findPostsByCategory(categoryDB.name);
+        //const posts: IPostDB | null = await postRepository.findPostsByCategory(categoryDB.name);
+
+        return posts;
     }
 }
 
