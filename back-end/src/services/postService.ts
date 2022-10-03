@@ -48,7 +48,7 @@ async function getPostByIdService (id: number) {
         post: {...post},
         user: {
             id: user.id,
-            name: user.id,
+            name: user.name,
             photo: user.photo,
             score: user.score
         }
