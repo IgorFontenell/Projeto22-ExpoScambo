@@ -17,18 +17,19 @@ async function create (postInfo: TypeCreatePost, userId: number) {
 }
 
 async function getCategoryPostsByName (category: string) {
-    if(category === "Recomendados") {
 
+    let posts;
+    if(category === "Recomendados") {
+        posts = await postRepository.findPostsByScore();
     } else {
         const categoryDB: ICategoryDB | null = await postRepository.findCategoryByName(category);
         if (!categoryDB) {
             throw {type: "not_found", message: "Category dosen't exist"}
         }
-        const posts = await postRepository.findPostsByCategory(categoryDB.name);
-        //const posts: IPostDB | null = await postRepository.findPostsByCategory(categoryDB.name);
-
-        return posts;
+        posts = await postRepository.findPostsByCategory(categoryDB.name);
+        //posts: IPostDB | null = await postRepository.findPostsByCategory(categoryDB.name);
     }
+    return posts;
 }
 
 export const postService = {

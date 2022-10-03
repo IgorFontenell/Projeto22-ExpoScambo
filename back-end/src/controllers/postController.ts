@@ -15,6 +15,7 @@ export async function createPostController (request: Request, response: Response
 }
 
 export async function getPostsByCategory(request: Request, response: Response) {
-    const category: string = request.body;
-    await postService.getCategoryPostsByName(category);
+    const category: string = request.params.category;
+    const posts = await postService.getCategoryPostsByName(category);
+    response.status(200).send(posts);
 }

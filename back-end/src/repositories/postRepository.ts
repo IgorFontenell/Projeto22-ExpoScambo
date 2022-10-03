@@ -43,9 +43,20 @@ async function findPostsByCategory (name: string) {
     }
     
 }
+async function findPostsByScore () {
+    try {
+        return await client.posts.findMany({
+            
+        });
+    } catch (error){
+        throw {type: "server_error", message: error}
+    }
+    
+}
 
 export const postRepository = {
     findCategoryByName,
     createPost,
-    findPostsByCategory
+    findPostsByCategory,
+    findPostsByScore
 }
