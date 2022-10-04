@@ -55,7 +55,7 @@ async function findUserById(id: number) {
     return user;
 }
 
-async function sendScoreService(courierId: number, buyerId: number, scoreInfo: { score: string }) {
+async function sendScoreService(courierId: number, buyerId: number, scoreInfo: { score: number }) {
     await validateSchemas(userSchema.sendScoreSchema, scoreInfo);
 
     const courier = await userRepository.findById(courierId);
@@ -69,7 +69,11 @@ async function sendScoreService(courierId: number, buyerId: number, scoreInfo: {
     };
 
     const alreadyEvaluated = await userRepository.userAlreadyEvaluated(buyerId, courierId);
+    if(alreadyEvaluated) {
+        throw {type: "not_acceptable", message: "User already gave a score to this courier"}
+    }
 
+    await userRepository.insertEvaluation(buyer.id, courier.id, scoreInfo.score);
 
     return ;
 }
