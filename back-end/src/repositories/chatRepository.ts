@@ -58,10 +58,23 @@ async function getChatBetween2Users (userId: number, destinyMessageId: number) {
         throw {type: "server_error", message: error}
     }
 }
+async function createChat (userId: number, destinyMessageId: number) {
+    try {
+        return await client.chat.create({
+            data: {
+                courierId: destinyMessageId,
+                buyerId: userId
+            }
+        });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
+}
 
 
 export const chatRepository = {
     getAllChats,
     getAllMessagesBetween2User,
-    getChatBetween2Users
+    getChatBetween2Users,
+    createChat
 }
