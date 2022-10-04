@@ -26,7 +26,7 @@ export async function sendScoreController (request: Request, response: Response)
     response.status(201).send("Score updated sucessfu");
 }
 
-export async function getUserInformation (request: Request, response: Response) {
+export async function getUserInformationController (request: Request, response: Response) {
     const userId = Number(request.params.userId);
     
     const user = await userService.getUserService(userId);
