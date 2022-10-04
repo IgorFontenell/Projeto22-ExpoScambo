@@ -39,8 +39,29 @@ async function getAllMessagesBetween2User (userId: number, destinyMessageId: num
     }
 }
 
+async function getChatBetween2Users (userId: number, destinyMessageId: number) {
+    try {
+        return await client.chat.findFirst({
+            where: {
+                OR: [
+                    { courierId: userId,
+                        buyerId: destinyMessageId 
+                    },
+                    {
+                        courierId: destinyMessageId,
+                        buyerId: userId 
+                    }
+                ],
+            }
+        });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
+}
+
 
 export const chatRepository = {
     getAllChats,
-    getAllMessagesBetween2User
+    getAllMessagesBetween2User,
+    getChatBetween2Users
 }
