@@ -3,6 +3,7 @@ import { chatRepository } from '../repositories/chatRepository';
 import { userRepository } from '../repositories/userRepository';
 import { IChatDB } from '../types/chatTypes';
 import dayjs from 'dayjs'
+import { messageSchema } from '../schemas/chatSchemas';
 
 async function getAll (userId: number) {
     const allMessages = await chatRepository.getAllChats(userId);
@@ -20,6 +21,8 @@ async function getAllMessages (userId: number, destinyMessageId: number) {
 }
 
 async function sendMessageService (messageText: string,userId: number, destinyMessageId: number) {
+
+    await validateSchemas(messageSchema.messageCreateSchema, messageText);
 
     const destinyUser = await userRepository.findById(destinyMessageId);
     if(!destinyUser) {
