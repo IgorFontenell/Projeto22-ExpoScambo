@@ -68,7 +68,7 @@ async function sendScoreService(courierId: number, buyerId: number, scoreInfo: {
         throw {type: "not_found", message: "Buyer do not exist!"}
     };
 
-    
+    const alreadyEvaluated = await userRepository.userAlreadyEvaluated(buyerId, courierId);
 
 
     return ;

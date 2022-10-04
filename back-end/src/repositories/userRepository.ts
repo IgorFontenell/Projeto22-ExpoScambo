@@ -71,11 +71,27 @@ async function userAlreadyEvaluated (evaluaterId: number, evaluatedId: number) {
     
 }
 
+async function insertEvaluation (evaluaterId: number, evaluatedId: number, score: number) {
+    try {
+        return client.scoreHistory.create({
+            data: { 
+                userId: evaluatedId,
+                evaluatorId: evaluaterId,
+                score: score
+             }
+          });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    } 
+}
+
+
 export const userRepository = {
     createUser,
     getUserByEmail,
     findById,
     getUserByCpf,
-    userAlreadyEvaluated
+    userAlreadyEvaluated,
+    insertEvaluation
 
 }
