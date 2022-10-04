@@ -56,6 +56,7 @@ async function findUserById(id: number) {
 }
 
 async function sendScoreService(courierId: number, buyerId: number, scoreInfo: { score: number }) {
+    scoreInfo.score = scoreInfo.score*100;
     await validateSchemas(userSchema.sendScoreSchema, scoreInfo);
 
     const courier = await userRepository.findById(courierId);
@@ -77,9 +78,11 @@ async function sendScoreService(courierId: number, buyerId: number, scoreInfo: {
 
     const finalScore = await userRepository.getScoreAverage(courier.id);
     console.log(finalScore);
+
     if(!finalScore._avg.score) {
         throw {type: "server_error", message: "Couldn't get the score updated"}
     }
+
     await userRepository.updateUserScore(courier.id, finalScore._avg.score);
     return ;
 }

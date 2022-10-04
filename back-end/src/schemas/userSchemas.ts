@@ -19,7 +19,7 @@ const userLoginSchema = joi.object({
 });
 
 const sendScoreSchema = joi.object({
-    score: joi.number().min(0).max(10).required()
+    score: joi.number().min(0).max(1000).required()
 });
 
 export const userSchema = {
