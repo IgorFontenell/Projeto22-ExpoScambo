@@ -5,6 +5,14 @@ export interface IChatDB {
     buyerId: number
 }
 
+export interface ISendMessage {
+    chatId: number
+    writerId: number
+    destinyId: number
+    message: string
+    timeOfMessage: string
+}
+
 // export interface ICategoryDB {
 //     id: number;
 //     name: string;

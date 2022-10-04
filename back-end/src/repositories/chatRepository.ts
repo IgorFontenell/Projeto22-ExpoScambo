@@ -1,5 +1,6 @@
 import { client } from "../config/connection";
 import user from "../routers/userRouter";
+import { ISendMessage } from "../types/chatTypes";
 
 async function getAllChats (id: number) {
     try {
@@ -71,10 +72,21 @@ async function createChat (userId: number, destinyMessageId: number) {
     }
 }
 
+async function sendMessageRepository (messageInfo: ISendMessage) {
+    try {
+        return await client.messages.create({
+            data: {...messageInfo}
+        });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
+}
+
 
 export const chatRepository = {
     getAllChats,
     getAllMessagesBetween2User,
     getChatBetween2Users,
-    createChat
+    createChat,
+    sendMessageRepository
 }
