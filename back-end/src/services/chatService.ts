@@ -1,6 +1,7 @@
 import { validateSchemas } from '../middlewares/schemaValidator';
 import { chatRepository } from '../repositories/chatRepository';
 import { userRepository } from '../repositories/userRepository';
+import { IChatDB } from '../types/chatTypes';
 import dayjs from 'dayjs'
 
 async function getAll (userId: number) {
@@ -18,7 +19,7 @@ async function getAllMessages (userId: number, destinyMessageId: number) {
     return allMessages;
 }
 
-async function sendMessageService (userId: number, destinyMessageId: number) {
+async function sendMessageService (messageText: string,userId: number, destinyMessageId: number) {
 
     const destinyUser = await userRepository.findById(destinyMessageId);
     if(!destinyUser) {
@@ -28,20 +29,32 @@ async function sendMessageService (userId: number, destinyMessageId: number) {
     let messageInfo;
     const now = dayjs().format('mm-HH-DD-MM-YYYY');
 
-    const chatAlreadyExist = await chatRepository.getChatBetween2Users(userId, destinyMessageId);          
+    const chatAlreadyExist: IChatDB | null = await chatRepository.getChatBetween2Users(userId, destinyMessageId);          
     if(!chatAlreadyExist) {
         await chatRepository.createChat(userId, destinyMessageId);
-        const chatInfo = await chatRepository.getChatBetween2Users(userId, destinyMessageId); 
+
+        const chatInfo: IChatDB | null= await chatRepository.getChatBetween2Users(userId, destinyMessageId);
+        if(!chatInfo) {
+            throw {type: "server_error", message: "Chat couldn't be created"}
+        }
         messageInfo = {
             chatId: chatInfo.id,
             writerId: userId,
             destinyId: destinyMessageId,
-            message: "dasdasdas",
+            message: messageText,
+            timeOfMessage: now
+        }
+    } else {
+        messageInfo = {
+            chatId: chatAlreadyExist.id,
+            writerId: userId,
+            destinyId: destinyMessageId,
+            message: messageText,
             timeOfMessage: now
         }
     }
-    
-    //await chatRepository.sendMessageRepository(userId, destinyMessageId);
+
+    await chatRepository.sendMessageRepository(messageInfo);
     return;
 }
 
