@@ -5,8 +5,8 @@ async function getAll (userId: number) {
     const allMessages = await chatRepository.getAllChats(userId);
     return allMessages;
 }
-async function getAllMessages (userId: number) {
-    const allMessages = await chatRepository.getAllChats(userId);
+async function getAllMessages (userId: number, destinyMessageId: number) {
+    const allMessages = await chatRepository.getAllMessagesBetween2User(userId, destinyMessageId);
     return allMessages;
 }
 

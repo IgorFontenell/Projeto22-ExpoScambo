@@ -12,7 +12,8 @@ export async function getAllChatsController (request: Request, response: Respons
 
 export async function getAllMessagesController (request: Request, response: Response) {
     const user = response.locals.user
-    const allMessages = await chatService.getAllMessages(user.userId);
+    const destinyMessageId = Number(request.params.destinyId);
+    const allMessages = await chatService.getAllMessages(user.id, destinyMessageId);
 
     response.status(200).send(allMessages);
     
