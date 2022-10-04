@@ -76,6 +76,6 @@ export const userRepository = {
     getUserByEmail,
     findById,
     getUserByCpf,
-    userAlreadyEvalueted
+    userAlreadyEvaluated
 
 }
