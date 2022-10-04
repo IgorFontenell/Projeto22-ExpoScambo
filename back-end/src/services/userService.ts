@@ -87,11 +87,23 @@ async function sendScoreService(courierId: number, buyerId: number, scoreInfo: {
     return ;
 }
 
+async function getUserService (userId: number) {
+    const user = await userRepository.findById(userId);
+    const userFinal = {
+        id: user?.id,
+        name: user?.name,
+        photo: user?.photo,
+        score: user?.score
+    }
+    return userFinal;
+}
+
 
 
 export const userService = {
     createUser,
     loginUser,
     findUserById,
-    sendScoreService
+    sendScoreService,
+    getUserService
 }
