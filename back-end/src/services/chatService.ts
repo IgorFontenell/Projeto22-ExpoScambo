@@ -5,6 +5,7 @@ import { IChatDB } from '../types/chatTypes';
 import dayjs from 'dayjs'
 import { messageSchema } from '../schemas/chatSchemas';
 
+
 async function getAll (userId: number) {
     const allMessages = await chatRepository.getAllChats(userId);
     return allMessages;
@@ -20,17 +21,17 @@ async function getAllMessages (userId: number, destinyMessageId: number) {
     return allMessages;
 }
 
-async function sendMessageService (messageText: string,userId: number, destinyMessageId: number) {
+async function sendMessageService (messageText: { message: string },userId: number, destinyMessageId: number) {
 
     await validateSchemas(messageSchema.messageCreateSchema, messageText);
-
+    
     const destinyUser = await userRepository.findById(destinyMessageId);
     if(!destinyUser) {
         throw {type: "not_found", message: "User dosen't exist"}
     }
 
     let messageInfo;
-    const now = dayjs().format('mm-HH-DD-MM-YYYY');
+    const now = dayjs().format('mm:HH-DD/MM/YYYY');
 
     const chatAlreadyExist: IChatDB | null = await chatRepository.getChatBetween2Users(userId, destinyMessageId);          
     if(!chatAlreadyExist) {
@@ -44,7 +45,7 @@ async function sendMessageService (messageText: string,userId: number, destinyMe
             chatId: chatInfo.id,
             writerId: userId,
             destinyId: destinyMessageId,
-            message: messageText,
+            message: messageText.message,
             timeOfMessage: now
         }
     } else {
@@ -52,11 +53,11 @@ async function sendMessageService (messageText: string,userId: number, destinyMe
             chatId: chatAlreadyExist.id,
             writerId: userId,
             destinyId: destinyMessageId,
-            message: messageText,
+            message: messageText.message,
             timeOfMessage: now
         }
     }
-
+    
     await chatRepository.sendMessageRepository(messageInfo);
     return;
 }

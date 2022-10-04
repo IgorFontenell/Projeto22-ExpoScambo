@@ -22,9 +22,9 @@ export async function getAllMessagesController (request: Request, response: Resp
 export async function sendMessage (request: Request, response: Response) {
     const user = response.locals.user
     const destinyMessageId = Number(request.params.destinyId);
-    const message = request.body.message
-    
-    await chatService.sendMessageService(message, user.id, destinyMessageId);
+    const messageInfo = request.body
+
+    await chatService.sendMessageService(messageInfo, user.id, destinyMessageId);
 
     response.status(201).send("Message send sucessfuly");
     

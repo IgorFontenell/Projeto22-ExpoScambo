@@ -32,7 +32,7 @@ async function getAllMessagesBetween2User (userId: number, destinyMessageId: num
                 ],
             },
             orderBy: {
-                timeOfMessage: 'asc'
+                id: 'asc'
             }
         });
     } catch (error) {
