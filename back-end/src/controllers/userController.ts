@@ -18,10 +18,10 @@ export async function loginController (request: Request, response: Response) {
 }
 
 export async function sendScoreController (request: Request, response: Response) {
-    const courierId = request.params.courierId;
+    const courierId = Number(request.params.courierId);
     const scoreInfo = request.body;
-
-    await userService.sendScoreService(courierId, scoreInfo);
+    const buyer = response.locals.user
+    await userService.sendScoreService(courierId, buyer.id,  scoreInfo);
 
 
     response.status(201).send("Score updated sucessfu")

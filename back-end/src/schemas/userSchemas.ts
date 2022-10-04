@@ -19,7 +19,7 @@ const userLoginSchema = joi.object({
 });
 
 const sendScoreSchema = joi.object({
-    message: joi.string().required()
+    score: joi.string().required()
 });
 
 export const userSchema = {

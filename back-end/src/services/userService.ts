@@ -55,9 +55,30 @@ async function findUserById(id: number) {
     return user;
 }
 
+async function sendScoreService(courierId: number, buyerId: number, scoreInfo: { score: string }) {
+    await validateSchemas(userSchema.sendScoreSchema, scoreInfo);
+
+    const courier = await userRepository.findById(courierId);
+    if (!courier) {
+        throw {type: "not_found", message: "Courier do not exist!"}
+    };
+
+    const buyer = await userRepository.findById(buyerId);
+    if (!buyer) {
+        throw {type: "not_found", message: "Buyer do not exist!"}
+    };
+
+    
+
+
+    return ;
+}
+
+
 
 export const userService = {
     createUser,
     loginUser,
-    findUserById
+    findUserById,
+    sendScoreService
 }

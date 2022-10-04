@@ -20,8 +20,11 @@ model Users {
   score Int @default(0)
 
   Posts Posts[]
-  user Chat[] @relation("user")
+  courier Chat[] @relation("courier")
   buyer Chat[] @relation("buyer")
+  user ScoreHistory[] @relation("user")
+  evaluator ScoreHistory[] @relation("evaluator")
+  
   @@map("users")
 }
 
@@ -56,7 +59,7 @@ model Chat {
   buyerId Int
 
 
-  user  Users @relation("user", fields: [courierId], references: [id])
+  courier  Users @relation("courier", fields: [courierId], references: [id])
   buyer  Users @relation("buyer", fields: [buyerId], references: [id])
   @@map("chat")
 }
@@ -72,4 +75,16 @@ model Messages {
 
   
   @@map("messages")
+}
+
+model ScoreHistory {
+  id Int @id @default(autoincrement())
+  userId Int
+  evaluatorId Int
+  score Int
+
+  user  Users @relation("user", fields: [userId], references: [id])
+  evaluator  Users @relation("evaluator", fields: [evaluatorId], references: [id])
+
+  @@map("scoreHistory")
 }
