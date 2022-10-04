@@ -100,6 +100,20 @@ async function getScoreAverage (evaluatedId: number) {
     } 
 }
 
+async function updateUserScore (userId: number, score: number) {
+    try {
+        return await client.users.update({
+            where: { 
+                id: userId
+             },
+             data: { score }
+          });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
+    
+}
+
 
 export const userRepository = {
     createUser,
@@ -108,6 +122,7 @@ export const userRepository = {
     getUserByCpf,
     userAlreadyEvaluated,
     insertEvaluation,
-    getScoreAverage
+    getScoreAverage,
+    updateUserScore
 
 }

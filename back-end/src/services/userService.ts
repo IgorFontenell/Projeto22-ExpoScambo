@@ -75,6 +75,7 @@ async function sendScoreService(courierId: number, buyerId: number, scoreInfo: {
 
     await userRepository.insertEvaluation(buyer.id, courier.id, scoreInfo.score);
 
+    const finalScore = await userRepository.getScoreAverage(courier.id);
     return ;
 }
 

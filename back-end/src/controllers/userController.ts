@@ -24,8 +24,6 @@ export async function sendScoreController (request: Request, response: Response)
     await userService.sendScoreService(courierId, buyer.id,  scoreInfo);
 
 
-    response.status(201).send("Score updated sucessfu")
-
-
+    response.status(201).send("Score updated sucessfu");
 
 }
