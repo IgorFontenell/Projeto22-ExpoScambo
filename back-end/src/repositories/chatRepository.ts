@@ -61,7 +61,7 @@ async function getChatBetween2Users (userId: number, destinyMessageId: number) {
 }
 async function createChat (userId: number, destinyMessageId: number) {
     try {
-        return await client.chat.create({
+         await client.chat.create({
             data: {
                 courierId: destinyMessageId,
                 buyerId: userId
@@ -74,7 +74,7 @@ async function createChat (userId: number, destinyMessageId: number) {
 
 async function sendMessageRepository (messageInfo: ISendMessage) {
     try {
-        return await client.messages.create({
+         await client.messages.create({
             data: {...messageInfo}
         });
     } catch (error) {

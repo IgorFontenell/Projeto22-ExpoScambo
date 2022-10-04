@@ -48,7 +48,7 @@ async function getUserByEmail (email: string) {
 
  async function findById (id: number) {
     try {
-        return client.users.findUnique({
+        return await client.users.findUnique({
             where: { id }
           });
     } catch (error) {
@@ -59,7 +59,7 @@ async function getUserByEmail (email: string) {
 
 async function userAlreadyEvaluated (evaluaterId: number, evaluatedId: number) {
     try {
-        return client.scoreHistory.findFirst({
+        return await client.scoreHistory.findFirst({
             where: { 
                 userId: evaluatedId,
                 evaluatorId: evaluaterId
@@ -73,11 +73,26 @@ async function userAlreadyEvaluated (evaluaterId: number, evaluatedId: number) {
 
 async function insertEvaluation (evaluaterId: number, evaluatedId: number, score: number) {
     try {
-        return client.scoreHistory.create({
+        await client.scoreHistory.create({
             data: { 
                 userId: evaluatedId,
                 evaluatorId: evaluaterId,
                 score: score
+             }
+          });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    } 
+}
+
+async function getScoreAverage (evaluatedId: number) {
+    try {
+       return await client.scoreHistory.aggregate({
+           _avg:{
+               score: true
+           },
+            where: { 
+                userId: evaluatedId
              }
           });
     } catch (error) {
@@ -92,6 +107,7 @@ export const userRepository = {
     findById,
     getUserByCpf,
     userAlreadyEvaluated,
-    insertEvaluation
+    insertEvaluation,
+    getScoreAverage
 
 }

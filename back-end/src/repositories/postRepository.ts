@@ -16,7 +16,7 @@ async function findCategoryByName (name: string) {
 async function createPost(postInfo: TypeCreatePost, userId: number){
 
     try {
-        return await client.posts.create({
+         await client.posts.create({
             data: {
                 userId: userId,
                 description: postInfo.description,
