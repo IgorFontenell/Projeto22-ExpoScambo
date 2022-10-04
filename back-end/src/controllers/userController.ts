@@ -21,7 +21,11 @@ export async function sendScoreController (request: Request, response: Response)
     const courierId = request.params.courierId;
     const scoreInfo = request.body;
 
-    
+    await userService.sendScoreService(courierId, scoreInfo);
+
+
+    response.status(201).send("Score updated sucessfu")
+
 
 
 }
