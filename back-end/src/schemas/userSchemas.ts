@@ -18,7 +18,12 @@ const userLoginSchema = joi.object({
     password: joi.string().required()
 });
 
+const sendScoreSchema = joi.object({
+    message: joi.string().required()
+});
+
 export const userSchema = {
     userRegisterSchema,
-    userLoginSchema
+    userLoginSchema,
+    sendScoreSchema
 }
