@@ -57,11 +57,11 @@ async function getUserByEmail (email: string) {
     
 }
 
-async function userAlreadyEvalueted (evaluaterId: number, evaluetedId: number) {
+async function userAlreadyEvaluated (evaluaterId: number, evaluatedId: number) {
     try {
         return client.scoreHistory.findFirst({
             where: { 
-                userId: evaluetedId,
+                userId: evaluatedId,
                 evaluatorId: evaluaterId
              }
           });
