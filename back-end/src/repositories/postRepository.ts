@@ -45,8 +45,14 @@ async function findPostsByCategory (name: string) {
 }
 async function findPostsByScore () {
     try {
-        return await client.posts.findMany({
-            
+        return await client.users.findMany({
+            select: {
+                Posts: true
+            },
+            orderBy: {
+                score: 'desc'
+            },
+            take: 20
         });
     } catch (error){
         throw {type: "server_error", message: error}

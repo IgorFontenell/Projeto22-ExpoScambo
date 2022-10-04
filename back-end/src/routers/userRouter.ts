@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { loginController, registerController } from "../controllers/userController";
+import { loginController, registerController, sendScoreController } from "../controllers/userController";
+import { autenticateMiddleware } from "../middlewares/authMiddleware";
 
 const user = Router();
 
 user.post("/sign-up", registerController);
 user.post("/sign-in", loginController);
+user.post("/user/sendScore/:courierId", autenticateMiddleware, sendScoreController)
 
 export default user;

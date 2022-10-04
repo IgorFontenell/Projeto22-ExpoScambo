@@ -16,3 +16,11 @@ export async function loginController (request: Request, response: Response) {
    response.status(200).send(token);
 
 }
+
+export async function sendScoreController (request: Request, response: Response) {
+    const courierId = request.params.courierId;
+    const scoreInfo = request.body;
+
+    
+
+}
