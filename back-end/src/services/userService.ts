@@ -76,6 +76,11 @@ async function sendScoreService(courierId: number, buyerId: number, scoreInfo: {
     await userRepository.insertEvaluation(buyer.id, courier.id, scoreInfo.score);
 
     const finalScore = await userRepository.getScoreAverage(courier.id);
+    console.log(finalScore);
+    if(!finalScore._avg.score) {
+        throw {type: "server_error", message: "Couldn't get the score updated"}
+    }
+    await userRepository.updateUserScore(courier.id, finalScore._avg.score);
     return ;
 }
 
