@@ -23,7 +23,13 @@ export async function sendScoreController (request: Request, response: Response)
     const buyer = response.locals.user
     await userService.sendScoreService(courierId, buyer.id,  scoreInfo);
 
-
     response.status(201).send("Score updated sucessfu");
+}
 
+export async function getUserInformation (request: Request, response: Response) {
+    const userId = Number(request.params.userId);
+    
+    const user = await userService.getUserService(userId);
+
+    response.status(200).send(user);
 }
