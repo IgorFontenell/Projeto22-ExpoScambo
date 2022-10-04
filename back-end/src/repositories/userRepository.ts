@@ -57,10 +57,25 @@ async function getUserByEmail (email: string) {
     
 }
 
+async function userAlreadyEvalueted (evaluaterId: number, evaluetedId: number) {
+    try {
+        return client.scoreHistory.findFirst({
+            where: { 
+                userId: evaluetedId,
+                evaluatorId: evaluaterId
+             }
+          });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
+    
+}
+
 export const userRepository = {
     createUser,
     getUserByEmail,
     findById,
-    getUserByCpf
+    getUserByCpf,
+    userAlreadyEvalueted
 
 }
