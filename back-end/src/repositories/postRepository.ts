@@ -77,12 +77,21 @@ async function findPostById (postId: number) {
     }
 }
 
+async function getAllCategoriesRepository () {
+    try {
+        return await client.category.findMany({});
+    } catch (error){
+        throw {type: "server_error", message: error}
+    }
+}
+
 export const postRepository = {
     findCategoryByName,
     createPost,
     findPostsByCategory,
     findPostsByScore,
-    findPostById
+    findPostById,
+    getAllCategoriesRepository
 }
 
 

@@ -27,7 +27,7 @@ export async function getPostById(request: Request, response: Response) {
 }
 
 export async function getCategories(request: Request, response: Response) {
-    const category: string = request.params.category;
-    const posts = await postService.getCategoryPostsByName(category);
-    response.status(200).send(posts);
+    
+    const categories = await postService.getAllCategories();
+    response.status(200).send(categories);
 }
