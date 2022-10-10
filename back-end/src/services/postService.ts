@@ -28,8 +28,26 @@ async function getCategoryPostsByName (category: string) {
             throw {type: "not_found", message: "Category dosen't exist"}
         }
         posts = await postRepository.findPostsByCategory(categoryDB.name);
-        //posts: IPostDB | null = await postRepository.findPostsByCategory(categoryDB.name);
+        
     }
+    posts = posts.map(object => {
+        const newPost = {
+            id: object.id,
+            userId: object.userId,
+            name: object.user.name,
+            email: object.user.email,
+            photo: object.user.photo,
+            score: object.user.score,
+            description: object.description,
+            categoryName: object.categoryName,
+            budget: object.budget,
+            travelAddress: object.travelAddress,
+            arrivalDay: object.arrivalDay,
+            departureDay: object.departureDay
+        }
+        return newPost;
+
+    })
     return posts;
 }
 

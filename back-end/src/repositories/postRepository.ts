@@ -36,7 +36,10 @@ async function createPost(postInfo: TypeCreatePost, userId: number){
 async function findPostsByCategory (name: string) {
     try {
         return await client.posts.findMany({
-            where: { categoryName: name }
+            where: { categoryName: name },
+            include: {
+                user: true
+            }
         });
     } catch (error){
         throw {type: "server_error", message: error}
@@ -57,7 +60,7 @@ async function findPostsByScore () {
                 
             }
         })
-        //return posts.filter(object => object.Posts.length !== 0);
+        
     } catch (error){
         throw {type: "server_error", message: error}
     }
@@ -83,15 +86,3 @@ export const postRepository = {
 
 
 
-// const posts =  await client.users.findMany({
-//     select: {
-//         Posts: {
-//             orderBy:{ id: "desc" },
-//             take: 1
-//     },
-// },
-// orderBy: {
-//     score: "desc"
-// },
-// take: 20,
-// });
