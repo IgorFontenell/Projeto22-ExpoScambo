@@ -2,6 +2,7 @@
 export interface IPostDB {
     id: number;
     userId: number;
+    title: string;
     description: string;
     categoryName: string;
     budget: number;

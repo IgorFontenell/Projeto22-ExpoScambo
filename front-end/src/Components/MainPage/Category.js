@@ -16,10 +16,14 @@ const CategoryDiv = styled.div`
     padding: 16px;
     margin-left: 20px;
     margin-right: 20px;
-
+    
     :hover {
         background-color: #F79B26;
         cursor: pointer;
         }
+    span {
+        font-family: proxima-nova, sans-serif;
+        font-size: 16px;
+    }
     
 `

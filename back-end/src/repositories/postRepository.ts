@@ -19,6 +19,7 @@ async function createPost(postInfo: TypeCreatePost, userId: number){
          await client.posts.create({
             data: {
                 userId: userId,
+                title: postInfo.title,
                 description: postInfo.description,
                 categoryName: postInfo.categoryName,
                 budget: postInfo.budget,
