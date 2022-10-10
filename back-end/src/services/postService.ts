@@ -76,6 +76,9 @@ async function getPostByIdService (id: number) {
 
 async function getAllCategories () {
     const categories = await postRepository.getAllCategoriesRepository();
+    if(!categories) {
+        throw {type: "not_found", message: "There are no categories yet!"}
+    }
     return categories;
 }
 
