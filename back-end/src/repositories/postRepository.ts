@@ -45,15 +45,19 @@ async function findPostsByCategory (name: string) {
 }
 async function findPostsByScore () {
     try {
-        return await client.users.findMany({
-            select: {
-                Posts: true
-            },
+        return await client.posts.findMany({
+            take: 20,
             orderBy: {
-                score: 'desc'
+                user: {
+                    score: "desc",
+                },
             },
-            take: 20
-        });
+            include: {
+                user: true,
+                
+            }
+        })
+        //return posts.filter(object => object.Posts.length !== 0);
     } catch (error){
         throw {type: "server_error", message: error}
     }
@@ -76,3 +80,18 @@ export const postRepository = {
     findPostsByScore,
     findPostById
 }
+
+
+
+// const posts =  await client.users.findMany({
+//     select: {
+//         Posts: {
+//             orderBy:{ id: "desc" },
+//             take: 1
+//     },
+// },
+// orderBy: {
+//     score: "desc"
+// },
+// take: 20,
+// });

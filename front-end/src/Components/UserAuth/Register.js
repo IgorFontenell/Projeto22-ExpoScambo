@@ -1,5 +1,3 @@
 export default function Register() {
-    return("register");
-
-
+    return("Register")
 }
