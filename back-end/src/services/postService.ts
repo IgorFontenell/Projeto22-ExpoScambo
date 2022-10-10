@@ -74,9 +74,15 @@ async function getPostByIdService (id: number) {
     return postInfo;
 }
 
+async function getAllCategories () {
+    const categories = await postRepository.getAllCategoriesRepository();
+    return categories;
+}
+
 export const postService = {
     create,
     getCategoryPostsByName,
-    getPostByIdService
+    getPostByIdService,
+    getAllCategories
     
 }
