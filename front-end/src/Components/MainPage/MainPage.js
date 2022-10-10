@@ -2,9 +2,9 @@ import styled from "styled-components";
 import CategoriesBar from "./CategoriesBar";
 import TopLogo from "../UsefullComponents/TopLogo"
 import SideBar from "../UsefullComponents/SideBar";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Posts from "./Posts";
-import UserContext from '../../contexts/UserContext';
+
 
 export default function MainPage() {
     const [ category, setCategory ] = useState("Recomendados");

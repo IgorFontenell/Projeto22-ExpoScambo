@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ChatPage from "./Components/ChatPage/ChatPage.js";
 import CreatePostPage from "./Components/CreatePostPage/CreatePostPage.js";
 import MainPage from "./Components/MainPage/MainPage.js";
 import PostPage from "./Components/PostPage/PostPage.js";
@@ -23,6 +24,7 @@ export default function App() {
                     <Route path="/post/:id" element={<PostPage />} />
                     <Route path="/profile/:id" element={<ProfilePage />} />
                     <Route path="/post/create" element={<CreatePostPage />} />
+                    <Route path="/chat/:courierId" element={<ChatPage />} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
