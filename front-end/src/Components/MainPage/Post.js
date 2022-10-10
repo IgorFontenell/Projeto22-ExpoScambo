@@ -1,18 +1,33 @@
 import styled from "styled-components";
 
 
-export default function Post() {
+export default function Post(
+    {
+    id, 
+    title, 
+    budget, 
+    travelAddress, 
+    categoryName,
+    photo, 
+    name, 
+    score 
+    }) {
+        
+
+
+
     return(
         <PostDiv>
-            <span> Trago apenas roupas </span>
-            <span> Valor Máximo: $ 500.00 </span>
-            <span> Local: Newyork - NY </span>
+            <span> {title} </span>
+            <span> Valor Máximo: $ {budget} </span>
+            <span> Local: {travelAddress} </span>
+            <span> Categoria: {categoryName} </span>
             <Profile>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQocDGgUY5qj7xJKLi-H7Vnv7oCiM2O55Ez-VxJo5b4Mw&s" alt="Perfil" width="100px"/>
+                <img src={photo} alt="Perfil" width="100px"/>
                 <div>
-                    <span>João Guilherme</span>
+                    <span>{name}</span>
                     <div>
-                        <span>8.9</span>   
+                        <span>{score/100}</span>   
                         <ion-icon name="star-outline"></ion-icon>
                     </div>
                       
@@ -55,6 +70,10 @@ const PostDiv = styled.div`
         padding-top: 5px;
         
     }
+    > span:nth-child(4) {
+        font-size: 16px;
+        padding-top: 5px;
+    }
     :hover {
         width: 306px;
         height: 244px;
@@ -76,7 +95,7 @@ const Profile = styled.div`
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        align-items: center;
+        align-items: flex-start;
         font-size: 16px;
         font-weight: bold;
         > div {

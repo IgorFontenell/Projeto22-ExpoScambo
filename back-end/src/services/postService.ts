@@ -34,6 +34,7 @@ async function getCategoryPostsByName (category: string) {
         const newPost = {
             id: object.id,
             userId: object.userId,
+            title: object.title,
             name: object.user.name,
             email: object.user.email,
             photo: object.user.photo,

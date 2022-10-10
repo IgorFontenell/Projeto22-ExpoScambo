@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import CategoriesBar from "./CategoriesBar";
 import TopLogo from "../UsefullComponents/TopLogo"
-import Post from "./Post";
 import SideBar from "../UsefullComponents/SideBar";
+import { useState } from "react";
+import Posts from "./Posts";
 
 export default function MainPage() {
+    const [ category, setCategory ] = useState(["Recomendados"]);
+
+
+
     return(
         <>
             <TopLogo />
@@ -12,28 +17,7 @@ export default function MainPage() {
                 <SideBar />
                 <Container >
                     <CategoriesBar />
-                    <Posts>
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                    </Posts>
+                    <Posts category={category} setCategory={setCategory} />
                 </Container>
             </MainPageDiv>
         </>
@@ -56,11 +40,4 @@ const Container = styled.div`
     
     
 `
-const Posts = styled.div`
-   width: 100%;
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   
-  
-`
+
