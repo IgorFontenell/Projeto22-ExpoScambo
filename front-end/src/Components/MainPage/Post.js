@@ -12,7 +12,7 @@ export default function Post(
     score 
     }) {
         const navigate = useNavigate();
-        const URL = 'http://localhost:4900'
+        
 
         function navigator() {
             navigate(`/post/${id}`)

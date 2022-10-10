@@ -33,9 +33,6 @@ export default function Posts({ category, setCategory }) {
             score={object.score} />)
          return(postsRender);
     }
-
-
-
     return(
         <>
             

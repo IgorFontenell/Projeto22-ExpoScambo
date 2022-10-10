@@ -8,7 +8,6 @@ import UserContext from '../../contexts/UserContext';
 
 export default function MainPage() {
     const [ category, setCategory ] = useState("Recomendados");
-    const { user ,setUser } = useContext(UserContext);
     
     
     return(
