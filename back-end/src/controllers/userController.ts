@@ -27,9 +27,18 @@ export async function sendScoreController (request: Request, response: Response)
 }
 
 export async function getUserInformationController (request: Request, response: Response) {
-    const userId = Number(request.params.userId);
-    
+    let userId = Number(request.params.userId);
     const user = await userService.getUserService(userId);
 
+    response.status(200).send(user);
+}
+
+export async function getUserInformationByToken (request: Request, response: Response) {
+    let user = response.locals.user;
+    user = {
+        id: user.id,
+        name: user.name,
+        photo: user.photo
+    }
     response.status(200).send(user);
 }

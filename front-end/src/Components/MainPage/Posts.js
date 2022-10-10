@@ -12,8 +12,8 @@ export default function Posts({ category, setCategory }) {
         request.then(response => {
             setPosts(response.data)
         });
-    }, []);
-    console.log(posts);
+    }, [category]);
+    
 
     function RenderPosts() {
          if(posts === []) {

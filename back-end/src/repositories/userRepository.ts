@@ -47,12 +47,14 @@ async function getUserByEmail (email: string) {
 }
 
  async function findById (id: number) {
+    
     try {
         return await client.users.findUnique({
             where: { id }
           });
     } catch (error) {
-        throw {type: "server_error", message: error}
+        console.log(error);
+        //throw {type: "server_error", message: error}
     }
     
 }

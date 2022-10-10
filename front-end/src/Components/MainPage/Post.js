@@ -1,6 +1,5 @@
 import styled from "styled-components";
-
-
+import { useNavigate } from 'react-router-dom';
 export default function Post(
     {
     id, 
@@ -12,12 +11,15 @@ export default function Post(
     name, 
     score 
     }) {
-        
+        const navigate = useNavigate();
+        const URL = 'http://localhost:4900'
 
-
+        function navigator() {
+            navigate(`/post/${id}`)
+        }
 
     return(
-        <PostDiv>
+        <PostDiv onClick={navigator}>
             <span> {title} </span>
             <span> Valor Máximo: $ {budget} </span>
             <span> Local: {travelAddress} </span>
@@ -41,7 +43,7 @@ export default function Post(
 
 const PostDiv = styled.div`
     width: 300px;
-    height: 240px;
+    height: 260px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,8 +77,8 @@ const PostDiv = styled.div`
         padding-top: 5px;
     }
     :hover {
-        width: 306px;
-        height: 244px;
+        width: 308px;
+        height: 266px;
     }
 
 `

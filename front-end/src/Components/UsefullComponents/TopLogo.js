@@ -3,7 +3,7 @@ import Logo from "../../Images/Logo.jpg";
 export default function TopLogo() {
     return (
         <TopLogoDiv>
-            <img src={Logo} />
+            <img src={Logo} alt="Logo" />
         </TopLogoDiv>
     )
 }

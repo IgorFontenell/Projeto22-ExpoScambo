@@ -88,6 +88,7 @@ async function sendScoreService(courierId: number, buyerId: number, scoreInfo: {
 }
 
 async function getUserService (userId: number) {
+    
     const user = await userRepository.findById(userId);
     const userFinal = {
         id: user?.id,
