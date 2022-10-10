@@ -231,25 +231,3 @@ const Profile = styled.div`
 `
 
 
-
-{/* <PostDiv onClick={navigator}>
-<span> {title} </span>
-<span> {description}</span>
-<span> Categoria: {categoryName} </span>
-<span> Valor Máximo: $ {budget} </span>
-<span> Local: {travelAddress} </span>
-<span> Ida: {arrivalDay} </span>
-<span> Volta: {departureDay} </span>
-<Profile>
-    <img src={photo} alt="Perfil" width="100px"/>
-    <div>
-        <span>{name}</span>
-        <div>
-            <span>{score/100}</span>   
-            <ion-icon name="star-outline"></ion-icon>
-        </div>
-          
-    </div>
-</Profile>
-</PostDiv> */}
-

@@ -38,7 +38,8 @@ export async function getUserInformationByToken (request: Request, response: Res
     user = {
         id: user.id,
         name: user.name,
-        photo: user.photo
+        photo: user.photo,
+        email: user.email
     }
     response.status(200).send(user);
 }

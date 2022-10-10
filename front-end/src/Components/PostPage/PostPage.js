@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import TopLogo from "../UsefullComponents/TopLogo"
 import SideBar from "../UsefullComponents/SideBar";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Post from "../MainPage/Post";
 import BigPost from "./BigPost";
 
 

@@ -51,19 +51,19 @@ export default function SideBar() {
     return (
         <SideBarDiv>
             <ProfileRender />
-            <Section onClick={() => navigator(navigate("/"))}>
+            <Section onClick={() => navigate("/post/create")}>
                 <ion-icon name="add-circle-outline"></ion-icon>
                 <span>Create</span>
             </Section>
-            <Section onClick={() => navigator(navigate("/"))}>
+            <Section onClick={() => navigate("/")}>
                 <ion-icon name="home-outline"></ion-icon>
                 <span>Main</span>
             </Section>
-            <Section onClick={() => navigator(navigate("/chat"))}>
+            <Section onClick={() => navigate("/chat")}>
                 <ion-icon name="chatbubble-outline"></ion-icon>
                 <span>Chat</span>
             </Section>
-            <Section onClick={() => navigator(navigate("/perfil"))}>
+            <Section onClick={() => navigate(`/profile/${user.id}`)}>
                 <ion-icon name="person-outline"></ion-icon>
                 <span>Perfil</span>
             </Section>

@@ -94,7 +94,8 @@ async function getUserService (userId: number) {
         id: user?.id,
         name: user?.name,
         photo: user?.photo,
-        score: user?.score
+        score: user?.score,
+        email: user?.email
     }
     return userFinal;
 }

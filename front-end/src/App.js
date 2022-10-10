@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CreatePostPage from "./Components/CreatePostPage/CreatePostPage.js";
 import MainPage from "./Components/MainPage/MainPage.js";
 import PostPage from "./Components/PostPage/PostPage.js";
+import ProfilePage from "./Components/ProfilePage/ProfilePage.js";
 import Login from "./Components/UserAuth/Login.js";
 import Register from "./Components/UserAuth/Register.js";
 import TokenContext from "./contexts/TokenContext.js";
@@ -19,6 +21,8 @@ export default function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/" element={<MainPage />} />
                     <Route path="/post/:id" element={<PostPage />} />
+                    <Route path="/profile/:id" element={<ProfilePage />} />
+                    <Route path="/post/create" element={<CreatePostPage />} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
