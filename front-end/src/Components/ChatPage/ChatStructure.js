@@ -6,7 +6,7 @@ import SideBar from "../UsefullComponents/SideBar";
 
 
 export default function ChatStructure() {
-
+    
 
     return(
         <ChatStructureDiv>
@@ -16,10 +16,8 @@ export default function ChatStructure() {
                     <span>João Guilherme</span>
                 </div>
                 <ion-icon name="people"></ion-icon>
-                
             </TopChat>
             <AllMessages>
-            
             </AllMessages>
             <SendMessage>
 
@@ -32,8 +30,10 @@ export default function ChatStructure() {
 
 const ChatStructureDiv = styled.div`
     width: 1200px;
+    height: 900px;
     display: flex;
     flex-direction: column;
+    background-color: #FFFFFF;
     
 `
 
@@ -59,8 +59,23 @@ const TopChat = styled.div`
     }
 `
 const AllMessages = styled.div`
-    
-    
+    width: 1200px;
+    background-color: #F5F5F5;
+    padding-top: 50px;
+    height: 715px;
+    border: 1px solid #D9D9D9;
+    font-family: proxima-nova, sans-serif;
+    font-size: 18px;
+    padding: 50px 20px 20px 20px;
+    > div {
+        
+        > div {
+            border: 1px solid #D9D9D9;
+            height: 40px;
+            width: 100%;
+        }
+    }
+
 `
 const SendMessage = styled.div`
     

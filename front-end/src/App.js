@@ -9,11 +9,15 @@ import Login from "./Components/UserAuth/Login.js";
 import Register from "./Components/UserAuth/Register.js";
 import TokenContext from "./contexts/TokenContext.js";
 import UserContext from './contexts/UserContext.js'
+import PageContext from "./contexts/PageContext.js";
 
 export default function App() {
     const [user, setUser] = useState('');
     const [token, setToken] = useState('');
+    const [page, setPage] = useState('/');
+
     return(
+        <PageContext.Provider value={{ page, setPage }}>
         <TokenContext.Provider value={{ token, setToken }}>
         <UserContext.Provider value={{ user, setUser }}>
             <BrowserRouter>
@@ -29,6 +33,7 @@ export default function App() {
             </BrowserRouter>
         </UserContext.Provider>
         </TokenContext.Provider>
+        </PageContext.Provider>
     );
 
 }

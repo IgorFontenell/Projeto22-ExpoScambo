@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import TokenContext from '../../contexts/TokenContext';
-
+import PageContext from '../../contexts/PageContext';
 
 export default function CreatePostPage() {
     const [title, setTitle] = useState('');
@@ -14,12 +14,14 @@ export default function CreatePostPage() {
     const [arrivalDay, setArrivalDay ] = useState('');
     const [departureDay, setDepartureDay ] = useState('');
     const { token , setToken } = useContext(TokenContext);
+    const { setPage } = useContext(PageContext);
     const navigate = useNavigate();
     const URL = 'http://localhost:4900'
 
     useEffect(() => {
         if(token === '') {
-            navigate(`/register`);
+            setPage(`/post/create`);
+            navigate(`/login`);
         } 
     }, []);
 

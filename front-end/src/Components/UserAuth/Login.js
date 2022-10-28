@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import TokenContext from '../../contexts/TokenContext';
+import PageContext from '../../contexts/PageContext';
 
 export default function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { setToken } = useContext(TokenContext);
+    const { page, setPage } = useContext(PageContext);
     const navigator = useNavigate();
     const URL = 'http://localhost:4900'
 
@@ -19,9 +21,10 @@ export default function Login() {
         try {
           const { data } = await axios.post(`${URL}/sign-in`, body);
           setToken(data);
-          navigator('/');
+          navigator(`${page}`);
+          setPage('/');
         } catch (error) {
-            alert(`${error} - Deu erro ao cadastrar o usuario`);
+            alert(`${error} - Deu erro ao logar o usuario`);
         }
       }
 

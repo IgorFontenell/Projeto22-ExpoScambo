@@ -6,25 +6,28 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import TokenContext from '../../contexts/TokenContext';
 import ChatStructure from "./ChatStructure";
-
+import PageContext from "../../contexts/PageContext";
 
 
 export default function ChatPage() {
     const courierId = useParams();
     const [ messages, setMessages ] = useState([]);
     const { token , setToken } = useContext(TokenContext);
+    const { setPage } = useContext(PageContext);
     const navigate = useNavigate();
     const URL = 'http://localhost:4900'
     
     
+    
     useEffect(() => {
-        // if(token === '') {
-        //     navigate(`/register`);
-        // }
-        // const request = axios.get(`${URL}/chat/${courierId.courierId}`);
-        // request.then(response => {
-        //     setMessages(response.data)
-        // });
+         if(token === '') {
+            setPage(`/chat/${courierId.courierId}`);
+            navigate(`/login`);
+         }
+         const request = axios.get(`${URL}/chat/${courierId.courierId}`);
+         request.then(response => {
+             setMessages(response.data)
+         });
     }, []);
     
     function RenderMessages() {
