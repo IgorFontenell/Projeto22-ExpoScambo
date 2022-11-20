@@ -54,6 +54,7 @@ const PostDiv = styled.div`
     box-shadow: 0 0 3px 0px #D9D9D9;
     margin: 40px;
     transition: width .1s;
+    padding: 5px;
 
      > span:nth-child(1) {
         font-size: 20px;

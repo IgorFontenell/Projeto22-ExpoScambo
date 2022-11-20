@@ -16,6 +16,7 @@ const TopLogoDiv = styled.div`
     box-shadow: 0px 0px 4px;
     position: fixed;
     height: 100px;
+    z-index: 2;
     img {
         width: 350px;
     }

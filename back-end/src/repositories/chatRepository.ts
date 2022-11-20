@@ -10,7 +10,8 @@ async function getAllChats (id: number) {
                     { courierId: id },
                     { buyerId: id}
                 ]
-            }
+            },
+            orderBy: {lastMessage: "desc"}
         });
     } catch (error) {
         throw {type: "server_error", message: error}
@@ -72,6 +73,20 @@ async function createChat (userId: number, destinyMessageId: number) {
     }
 }
 
+async function updateChat (chatId: number, timeOfMessage: string, lastMessage: string) {
+    try {
+         await client.chat.update({
+            where: { id: chatId },
+            data: {
+                timeOfMessage: timeOfMessage,
+                lastMessage: lastMessage
+            }
+        });
+    } catch (error) {
+        throw {type: "server_error", message: error}
+    }
+}
+
 async function sendMessageRepository (messageInfo: ISendMessage) {
     try {
          await client.messages.create({
@@ -88,5 +103,6 @@ export const chatRepository = {
     getAllMessagesBetween2User,
     getChatBetween2Users,
     createChat,
-    sendMessageRepository
+    sendMessageRepository,
+    updateChat
 }

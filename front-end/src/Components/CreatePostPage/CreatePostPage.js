@@ -54,20 +54,16 @@ export default function CreatePostPage() {
             <form>
                 <input
                     type="text"
+                    maxLength={25}
                     onChange={e => setTitle(e.target.value)}
                     placeholder="Titulo"
                     required
                 />
                 <input
                     type="text"
+                    maxLength={230}
                     onChange={e => setDescription(e.target.value)}
                     placeholder="Descrição"
-                    required
-                />
-                <input
-                    type="text"
-                    onChange={e => setCategoryName(e.target.value)}
-                    placeholder="Categoria"
                     required
                 />
                 <input
@@ -94,6 +90,18 @@ export default function CreatePostPage() {
                     placeholder="Que dia você irá embora?"
                     required
                 />
+                 <select id='categories' 
+                 onChange={e => setCategoryName(e.target.value)}
+                 value={categoryName}
+                 required
+                 >
+                    <option value=""> -- Selecione a categoria -- </option>
+                    <option value="Roupas">Roupas</option>
+                    <option value="Celulares">Celulares</option>
+                    <option value="Jogos">Jogos</option>
+                    <option value="Eletrônicos">Eletrônicos</option>
+                    <option value="Outros">Outros</option>
+                </select>
 
                 <button type="submit" onClick={handleSubmit}>Criar Post</button>
             </form>
@@ -129,6 +137,18 @@ form {
 }
 
 input{
+    width: 30%;
+    max-width: 470px;
+    height: 58px;
+    padding: 18px 15px;
+    border-radius: 30px;
+    border: none;
+    background-color: #FFFFFF;
+    color:#000000;
+    font-size: 16px;
+    margin-bottom: 13px;
+}
+select {
     width: 30%;
     max-width: 470px;
     height: 58px;

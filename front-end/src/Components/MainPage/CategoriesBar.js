@@ -5,22 +5,22 @@ import axios from 'axios';
 
 export default function CategoriesBar({ category, setCategory }) {
 
-    const [ categories, setCategories ] = useState([]);
+    const [ categoriesInTheBar, setCategoriesInTheBar ] = useState([]);
+    const URL = "http://localhost:4900"
     
     useEffect(() => {
-        const request = axios.get(`http://localhost:4900/categories`);
+        const request = axios.get(`${URL}/categories`);
         request.then(response => {
-            setCategories(response.data)
+            setCategoriesInTheBar(response.data)
         });
     }, []);
-    console.log(categories);
 
     function RenderCategory() {
-         if(categories === []) {
+         if(categoriesInTheBar === []) {
              return (<></>);
          };
 
-         let categoriesRender = categories.map(object => 
+         let categoriesRender = categoriesInTheBar.map(object => 
             <Category 
             key={object.id} 
             id={object.id} 
@@ -33,7 +33,7 @@ export default function CategoriesBar({ category, setCategory }) {
 
     return (
         <CategoriesDiv>
-            <Category name={"Recomendados"} categoryChoosed={category}/>
+            <Category name={"Recomendados"} categoryChoosed={category} setCategory={setCategory} />
             <RenderCategory />
         </CategoriesDiv>
     )

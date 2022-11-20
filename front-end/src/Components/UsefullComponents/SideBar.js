@@ -15,7 +15,7 @@ export default function SideBar() {
           Authorization: `Bearer ${token}`,
         },
       };
-
+    
     useEffect(() => {
         if(token !== '') {
             const request = axios.get(`${URL}/user/profile/me`, config);
@@ -24,7 +24,6 @@ export default function SideBar() {
             })
             .catch(error => {
                 console.log(error)
-                
             })
         }
         
@@ -51,21 +50,21 @@ export default function SideBar() {
     return (
         <SideBarDiv>
             <ProfileRender />
-            <Section onClick={() => navigate("/post/create")}>
-                <ion-icon name="add-circle-outline"></ion-icon>
-                <span>Create</span>
-            </Section>
             <Section onClick={() => navigate("/")}>
-                <ion-icon name="home-outline"></ion-icon>
+                <ion-icon name="home"></ion-icon>
                 <span>Main</span>
             </Section>
-            <Section onClick={() => navigate("/chat")}>
-                <ion-icon name="chatbubble-outline"></ion-icon>
+            <Section onClick={() => navigate(`/chat/allChats`)}>
+                <ion-icon name="chatbubble"></ion-icon>
                 <span>Chat</span>
             </Section>
             <Section onClick={() => navigate(`/profile/${user.id}`)}>
-                <ion-icon name="person-outline"></ion-icon>
+                <ion-icon name="person"></ion-icon>
                 <span>Perfil</span>
+            </Section>
+            <Section onClick={() => navigate("/post/create")}>
+                <ion-icon name="add-circle"></ion-icon>
+                <span>Create</span>
             </Section>
             
         </SideBarDiv>
@@ -73,9 +72,9 @@ export default function SideBar() {
 }
 
 const SideBarDiv = styled.div`
-    width: 200px;
-    height: 800px;
-    background-color: #F5F5F5;
+    width: 80px;
+    height: 100vh;
+    background-color: #EFF2F4;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -84,6 +83,24 @@ const SideBarDiv = styled.div`
     font-size: 14px;
     font-family: proxima-nova, sans-serif;
     border: 1px solid #D9D9D9;
+    
+    span {
+        display: none;
+    }
+    :hover {
+        width: 200px;
+        span {
+            display: initial;
+        }
+         > div {
+            padding-left: 30px;
+            justify-content: flex-start;
+         }
+         > div:nth-child(1) {
+             padding-left: 0px;
+             justify-content: space-evenly;
+         }
+    }
 `
 
 const Profile = styled.div`
@@ -98,7 +115,7 @@ const Profile = styled.div`
     border-radius: 6px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     img {
         width: 40px;
         height: 40px;
@@ -108,20 +125,26 @@ const Profile = styled.div`
 `
 
 const Section = styled.div`
+    width: 100%;
     font-size: 24px;
     margin-bottom: 10px;
-    padding-left: 10px;
     font-weight: bold;
     display: flex;
     align-items: center;
     height: 45px;
+    justify-content: center;
+    color: #5D7285;
     ion-icon {
-        font-size: 24px;
-        margin-right: 10px; 
+        font-size: 28px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: flex-start;
+        
     }
 
     :hover {
-        background-color: #F79B26;
+        background-color: #0C7FDA;
+        color: #FFFFFF;
         cursor: pointer;
         }
     

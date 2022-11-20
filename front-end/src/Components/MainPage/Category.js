@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export default function Category({ name, categoryChoosed, setCategory}) {
-    console.log(name, categoryChoosed);
-
 
     return (
         <CategoryDiv onClick={() => setCategory(name)} categoryChoosed={categoryChoosed} name={name}>

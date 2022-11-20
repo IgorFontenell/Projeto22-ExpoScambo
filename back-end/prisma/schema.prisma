@@ -58,7 +58,8 @@ model Chat {
   id Int @id @default(autoincrement())
   courierId Int
   buyerId Int
-
+  timeOfMessage String? 
+  lastMessage String?
 
   courier  Users @relation("courier", fields: [courierId], references: [id])
   buyer  Users @relation("buyer", fields: [buyerId], references: [id])

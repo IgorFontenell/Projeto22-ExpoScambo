@@ -47,7 +47,6 @@ async function getUserByEmail (email: string) {
 }
 
  async function findById (id: number) {
-    
     try {
         return await client.users.findUnique({
             where: { id }

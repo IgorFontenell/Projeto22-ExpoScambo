@@ -12,7 +12,10 @@ async function getAll (userId: number) {
 }
 
 async function getAllMessages (userId: number, destinyMessageId: number) {
-
+    
+    if(!destinyMessageId) {
+        throw {type: "not_acceptable", message: "User Id wasen't send!"};
+    }
     const destinyUser = await userRepository.findById(destinyMessageId);
     if(!destinyUser) {
         throw {type: "not_found", message: "User dosen't exist"}
@@ -24,20 +27,19 @@ async function getAllMessages (userId: number, destinyMessageId: number) {
 async function sendMessageService (messageText: { message: string },userId: number, destinyMessageId: number) {
 
     await validateSchemas(messageSchema.messageCreateSchema, messageText);
-    
     const destinyUser = await userRepository.findById(destinyMessageId);
     if(!destinyUser) {
         throw {type: "not_found", message: "User dosen't exist"}
     }
 
     let messageInfo;
-    const now = dayjs().format('mm:HH-DD/MM/YYYY');
+    const now = dayjs().format('HH:mm-DD/MM/YYYY');
 
     const chatAlreadyExist: IChatDB | null = await chatRepository.getChatBetween2Users(userId, destinyMessageId);          
     if(!chatAlreadyExist) {
         await chatRepository.createChat(userId, destinyMessageId);
 
-        const chatInfo: IChatDB | null= await chatRepository.getChatBetween2Users(userId, destinyMessageId);
+        const chatInfo: IChatDB | null = await chatRepository.getChatBetween2Users(userId, destinyMessageId);
         if(!chatInfo) {
             throw {type: "server_error", message: "Chat couldn't be created"}
         }
@@ -57,8 +59,8 @@ async function sendMessageService (messageText: { message: string },userId: numb
             timeOfMessage: now
         }
     }
-    
     await chatRepository.sendMessageRepository(messageInfo);
+    await chatRepository.updateChat(messageInfo.chatId, messageInfo.timeOfMessage, messageInfo.message);
     return;
 }
 

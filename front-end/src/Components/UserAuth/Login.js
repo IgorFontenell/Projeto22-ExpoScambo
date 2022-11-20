@@ -4,12 +4,14 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 import TokenContext from '../../contexts/TokenContext';
 import PageContext from '../../contexts/PageContext';
+import UserContext from '../../contexts/UserContext';
 
 export default function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { setToken } = useContext(TokenContext);
+    const { setUser } = useContext(UserContext);
     const { page, setPage } = useContext(PageContext);
     const navigator = useNavigate();
     const URL = 'http://localhost:4900'
@@ -19,14 +21,41 @@ export default function Login() {
         e.preventDefault();
         const body = { email, password };
         try {
-          const { data } = await axios.post(`${URL}/sign-in`, body);
-          setToken(data);
-          navigator(`${page}`);
-          setPage('/');
+          const { data } = await axios.post(`${URL}/sign-in`, body); // Sign-in the user
+          setToken(data); // Setting the token in to the useContext for after uses.
+          const userData = getTheUserInfo(data);
+          if(page.slice(0, 8) === "/profile") { // Going back to the profile page
+            goToProfilePage(userData.id);
+          } else {
+            setUser({...userData})
+            navigator(`${page}`);
+            setPage('/');
+          }
         } catch (error) {
             alert(`${error} - Deu erro ao logar o usuario`);
         }
       }
+
+      async function getTheUserInfo(token) {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const user = await axios.get(`${URL}/user/profile/me`, config);
+        return user.data;
+        } 
+      
+
+      async function goToProfilePage(id) {
+        let idFromProfilePage = page.slice(9);
+        if(page.slice(9) === '0') {
+            idFromProfilePage = id;
+          } 
+        navigator(`/profile/${idFromProfilePage}`);
+        setPage(`/profile/${idFromProfilePage}`);
+      }
+
 
     return (
         <MainStyle>
@@ -52,7 +81,7 @@ export default function Login() {
         </>        
     </MainStyle>
     );
-}
+  }
 
 const MainStyle = styled.main`
 display: flex;

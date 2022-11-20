@@ -28,7 +28,7 @@ export default function App() {
                     <Route path="/post/:id" element={<PostPage />} />
                     <Route path="/profile/:id" element={<ProfilePage />} />
                     <Route path="/post/create" element={<CreatePostPage />} />
-                    <Route path="/chat/:courierId" element={<ChatPage />} />
+                    <Route path="/chat/:otherUserId" element={<ChatPage />} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

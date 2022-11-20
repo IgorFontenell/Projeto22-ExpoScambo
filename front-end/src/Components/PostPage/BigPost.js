@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
+
 export default function BigPost(
     {
     id, 
@@ -16,11 +17,6 @@ export default function BigPost(
     userId
     }) {
         const navigate = useNavigate();
-        
-
-        function navigator() {
-            navigate(`/post/${id}`)
-        }
 
     return(
         <>
@@ -92,6 +88,7 @@ const PostDiv = styled.div`
     transition: padding .1s;
     padding-left: 35px;
     padding-bottom: 35px;
+    padding-right: 10px;
 
      > span:nth-child(1) {
         font-size: 36px;

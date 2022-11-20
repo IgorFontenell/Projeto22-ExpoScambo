@@ -4,7 +4,7 @@ import { chatService } from '../services/chatService';
 
 export async function getAllChatsController (request: Request, response: Response) {
     const user = response.locals.user
-    const allChats = await chatService.getAll(user.userId);
+    const allChats = await chatService.getAll(user.id);
 
     response.status(200).send(allChats);
     

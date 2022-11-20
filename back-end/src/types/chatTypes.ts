@@ -3,6 +3,8 @@ export interface IChatDB {
     id: number;
     courierId: number
     buyerId: number
+   // timeOfMessage: string
+   // lastMessage: string
 }
 
 export interface ISendMessage {

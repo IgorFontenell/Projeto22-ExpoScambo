@@ -47,6 +47,9 @@ async function loginUser (userInfo: IUserLogin) {
 }
 
 async function findUserById(id: number) {
+    if(!id) {
+        throw {type: "not_acceptable", message: "User Id wasen't send!"};
+    }
     const user = await userRepository.findById(id);
     if (!user) {
         throw {type: "not_found", message: "User do not exist!"}
@@ -77,7 +80,7 @@ async function sendScoreService(courierId: number, buyerId: number, scoreInfo: {
     await userRepository.insertEvaluation(buyer.id, courier.id, scoreInfo.score);
 
     const finalScore = await userRepository.getScoreAverage(courier.id);
-    console.log(finalScore);
+
 
     if(!finalScore._avg.score) {
         throw {type: "server_error", message: "Couldn't get the score updated"}
@@ -88,7 +91,10 @@ async function sendScoreService(courierId: number, buyerId: number, scoreInfo: {
 }
 
 async function getUserService (userId: number) {
-    
+    if(!userId) {
+        throw {type: "not_acceptable", message: "User Id wasen't send!"};
+    }
+
     const user = await userRepository.findById(userId);
     const userFinal = {
         id: user?.id,
