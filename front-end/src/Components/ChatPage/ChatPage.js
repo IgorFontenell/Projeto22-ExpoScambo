@@ -22,14 +22,15 @@ export default function ChatPage() {
           Authorization: `Bearer ${token}`,
         },
       };
-      
+      console.log(user);
     useEffect(async () => {
         if(token === '') {
             setPage(`/chat/${otherUserId}`);
             navigate(`/login`);
             return;
-         } else if(otherUserId === "allChats") {
+         } else if (otherUserId == user.id || otherUserId === "allChats") {
             const fristId = await gettingTheFristChatId();
+            console.log(fristId);
             navigate(`/chat/${fristId}`);
         } 
         
@@ -40,7 +41,6 @@ export default function ChatPage() {
     async function gettingTheFristChatId () {
 
         const request = await axios.get(`${URL}/chat/all`, config);
-        console.log(request.data, user);
         let seekingForTheTrueId = {
             buyerId: request.data[0].buyerId,
             courierId: request.data[0].courierId

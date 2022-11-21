@@ -23,7 +23,7 @@ export default function Login() {
         try {
           const { data } = await axios.post(`${URL}/sign-in`, body); // Sign-in the user
           setToken(data); // Setting the token in to the useContext for after uses.
-          const userData = getTheUserInfo(data);
+          const userData = await getTheUserInfo(data);
           if(page.slice(0, 8) === "/profile") { // Going back to the profile page
             goToProfilePage(userData.id);
           } else {
@@ -49,7 +49,7 @@ export default function Login() {
 
       async function goToProfilePage(id) {
         let idFromProfilePage = page.slice(9);
-        if(page.slice(9) === '0') {
+        if(idFromProfilePage === '0') {
             idFromProfilePage = id;
           } 
         navigator(`/profile/${idFromProfilePage}`);
