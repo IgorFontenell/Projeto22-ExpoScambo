@@ -143,11 +143,7 @@ const PostDiv = styled.div`
         }
     }
     }
-     
-    :hover {
-        width: 460px;
-        padding-bottom: 40px;
-    }
+
 
 `
 const Profile = styled.div`

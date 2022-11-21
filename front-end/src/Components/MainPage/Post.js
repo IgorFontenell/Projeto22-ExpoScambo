@@ -9,7 +9,8 @@ export default function Post(
     categoryName,
     photo, 
     name, 
-    score 
+    score,
+    description
     }) {
         const navigate = useNavigate();
         
@@ -20,21 +21,27 @@ export default function Post(
 
     return(
         <PostDiv onClick={navigator}>
-            <span> {title} </span>
-            <span> Valor Máximo: $ {budget} </span>
-            <span> Local: {travelAddress} </span>
-            <span> Categoria: {categoryName} </span>
-            <Profile>
-                <img src={photo} alt="Perfil" width="100px"/>
-                <div>
-                    <span>{name}</span>
+            <div className="front face">
+                <span> {title} </span>
+                <span> Valor Máximo: $ {budget} </span>
+                <span> Local: {travelAddress} </span>
+                <span> Categoria: {categoryName} </span>
+                <Profile>
+                    <img src={photo} alt="Perfil" width="100px"/>
                     <div>
-                        <span>{score/100}</span>   
-                        <ion-icon name="star-outline"></ion-icon>
+                        <span>{name}</span>
+                        <div>
+                            <span>{score/100}</span>   
+                            <ion-icon name="star-outline"></ion-icon>
+                        </div>
+                        
                     </div>
-                      
-                </div>
-            </Profile>
+                </Profile>
+            </div>
+            <div className="back face">
+                <span> Descrição</span>
+                <span>{description}</span>
+            </div>
         </PostDiv>
         
     
@@ -44,43 +51,78 @@ export default function Post(
 const PostDiv = styled.div`
     width: 300px;
     height: 260px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #D9D9D9;
-    border-radius: 24px;
-    font-family: proxima-nova, sans-serif;
-    background-color: #FFFFFF;
-    box-shadow: 0 0 3px 0px #D9D9D9;
     margin: 40px;
-    transition: width .1s;
-    padding: 5px;
+    position: relative;
 
-     > span:nth-child(1) {
+    .face {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        position: absolute;
+        backface-visibility: hidden;
+        transition: all .7s;
+        transform-style: preserve-3d;
+        box-shadow: 0 0 3px 0px #D9D9D9;
+        border: 1px solid #D9D9D9;
+        border-radius: 24px;
+        font-family: proxima-nova, sans-serif;
+        background-color: #FFFFFF;
+    }
+    .front {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        > span:nth-child(1) {
         font-size: 20px;
         font-weight: bold;
         padding-top: 15px;
+        }
+
+        > span:nth-child(2) {
+            font-size: 16px;
+            padding-top: 5px;
+            font-weight: bold;
+            }
+
+        > span:nth-child(3) {
+            font-size: 16px;
+            padding-top: 5px;
+            }
+
+        > span:nth-child(4) {
+            font-size: 16px;
+            padding-top: 5px;
+            }
+    }
+    .back {
+        transform: rotateY(180deg);
+        justify-content: flex-start;
+        padding: 15px;
+        span:nth-child(1) {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        span:nth-child(2) {
+            font-size: 16px;
+            font-weight: none;
+        }
     }
 
-     > span:nth-child(2) {
-        font-size: 16px;
-        font-weight: bold;
-        padding-top: 5px;
-    }
+    :hover .back {
+        transform: rotateY(0deg);
+      }
 
-     > span:nth-child(3) {
-        font-size: 16px;
-        padding-top: 5px;
-        
-    }
-    > span:nth-child(4) {
-        font-size: 16px;
-        padding-top: 5px;
-    }
-    :hover {
+    :hover .front {
+        transform: rotateY(-180deg);
+      }
+    /* :hover {
         width: 308px;
         height: 266px;
-    }
+    } */
 
 `
 const Profile = styled.div`

@@ -11,7 +11,7 @@ async function getAllChats (id: number) {
                     { buyerId: id}
                 ]
             },
-            orderBy: {lastMessage: "desc"}
+            orderBy: {timeOfMessage: "desc"}
         });
     } catch (error) {
         throw {type: "server_error", message: error}

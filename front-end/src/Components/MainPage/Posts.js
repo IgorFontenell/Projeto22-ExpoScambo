@@ -30,7 +30,9 @@ export default function Posts({ category, setCategory }) {
             categoryName={object.categoryName}
             photo={object.photo} 
             name={object.name} 
-            score={object.score} />)
+            score={object.score}
+            description={object.description}
+             />)
          return(postsRender);
     }
     return(
