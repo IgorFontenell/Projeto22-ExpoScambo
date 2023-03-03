@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import axios from 'axios';
 import TokenContext from '../../../../contexts/TokenContext';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from "react";
 import ChatMessage from "./ChatMessage";
 import BackgroundChat from '../../../../Images/BackgroundChat.jpg';
@@ -9,8 +8,7 @@ import BackgroundChat from '../../../../Images/BackgroundChat.jpg';
 export default function ChatAllMessages({ otherUserId, otherUserPhoto, updateMessages }) {
     const [ messages, setMessages ] = useState([]);
     const { token , setToken } = useContext(TokenContext);
-    const navigate = useNavigate();
-    const URL = 'http://localhost:4900'
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
     const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -18,10 +16,13 @@ export default function ChatAllMessages({ otherUserId, otherUserPhoto, updateMes
       };
 
     function searchMessages () {
-        const request = axios.get(`${URL}/chat/${otherUserId}`, config);
-        request.then(response => {
-            setMessages(response.data)
-        });
+        if(otherUserId !== 'allChats' && otherUserId !== undefined ) {
+            console.log(otherUserId)
+            const request = axios.get(`${URL}/chat/${otherUserId}`, config);
+            request.then(response => {
+                setMessages(response.data)
+            });
+        }
     }
     
     useEffect(() => {
@@ -31,7 +32,7 @@ export default function ChatAllMessages({ otherUserId, otherUserPhoto, updateMes
 
    function RenderMessages() {
     if(messages.length === 0) {
-        return (<></>);
+        return (<div></div>);
     } else {
         const messagesRender = messages.map((object, index) => 
         <ChatMessage

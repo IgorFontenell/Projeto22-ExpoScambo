@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import PageContext from "../../contexts/PageContext";
 import TokenContext from "../../contexts/TokenContext";
 
 export default function ProfileBox({ id, photo, name, score, email }) {
-    const [userLogged, setUserLogged] = useState(false)
     const { token } = useContext(TokenContext);
     const { setPage } = useContext(PageContext);
     const navigate = useNavigate();

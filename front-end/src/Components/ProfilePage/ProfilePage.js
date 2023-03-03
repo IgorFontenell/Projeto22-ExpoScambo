@@ -10,7 +10,7 @@ import axios from "axios";
 export default function ProfilePage() {
     const [ profile, setProfile ] = useState('');
     const userId = useParams();
-    const URL = 'http://localhost:4900'
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
     
     
     useEffect(() => {

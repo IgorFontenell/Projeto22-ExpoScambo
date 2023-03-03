@@ -10,7 +10,7 @@ import BigPost from "./BigPost";
 export default function PostPage() {
     const postId = useParams();
     const [ post, setPost ] = useState([]);
-    const URL = 'http://localhost:4900'
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
     
     
     useEffect(() => {

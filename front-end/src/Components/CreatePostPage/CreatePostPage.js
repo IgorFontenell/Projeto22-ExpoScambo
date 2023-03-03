@@ -16,7 +16,7 @@ export default function CreatePostPage() {
     const { token , setToken } = useContext(TokenContext);
     const { setPage } = useContext(PageContext);
     const navigate = useNavigate();
-    const URL = 'http://localhost:4900'
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
 
     useEffect(() => {
         if(token === '') {
@@ -67,7 +67,7 @@ export default function CreatePostPage() {
                     required
                 />
                 <input
-                    type="text"
+                    type="number"
                     onChange={e => setBudget(e.target.value)}
                     placeholder="Valor máximo"
                     required

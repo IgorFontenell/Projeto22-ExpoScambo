@@ -1,13 +1,6 @@
 import styled from "styled-components";
-import TopLogo from "../../UsefullComponents/TopLogo"
-import SideBar from "../../UsefullComponents/SideBar";
-import { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import TokenContext from '../../../contexts/TokenContext';
-import ChatStructure from "../ChatStructure/ChatStructure";
-import PageContext from "../../../contexts/PageContext";
-import UserContext from "../../../contexts/UserContext";
+import {  useNavigate } from 'react-router-dom';
+
 
 
 export default function ChatEachBox ({ 
@@ -16,10 +9,9 @@ export default function ChatEachBox ({
     name,
     timeOfLastMessage,
     lastMessage,
-    chatBoxIdChoosed,
-    setChatBoxIdChoosed 
+    chatBoxIdChoosed, 
     }) {
-    //console.log(id, chatBoxIdChoosed);
+    
     const navigate = useNavigate();
     let newFormatLastMessage = lastMessage;
     let isSelected;

@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import axios from 'axios';
 import UserContext from '../../../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from "react";
 
 export default function ChatMessage({ message, timeOfMessage, writerId, image }) {
-    const [ messages, setMessages ] = useState([]);
     const [ typeMessage, setTypeMessage ] = useState('otherUser');
     const { user , setUser } = useContext(UserContext);
     const navigate = useNavigate();

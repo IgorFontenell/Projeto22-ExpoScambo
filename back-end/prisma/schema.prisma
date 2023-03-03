@@ -90,3 +90,4 @@ model ScoreHistory {
 
   @@map("scoreHistory")
 }
+

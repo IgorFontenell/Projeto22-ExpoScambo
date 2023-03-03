@@ -3,12 +3,13 @@ import Post from "./Post";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function Posts({ category, setCategory }) {
+export default function Posts({ category }) {
 
     const [ posts, setPosts ] = useState([]);
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
     
     useEffect(() => {
-        const request = axios.get(`http://localhost:4900/category/${category}`);
+        const request = axios.get(`${URL}/category/${category}`);
         request.then(response => {
             setPosts(response.data)
         });
@@ -35,12 +36,12 @@ export default function Posts({ category, setCategory }) {
              />)
          return(postsRender);
     }
+    
     return(
         <>
-            
-                    <PostsDiv>
-                        <RenderPosts />
-                    </PostsDiv>
+            <PostsDiv>
+                <RenderPosts />
+            </PostsDiv>
                
         </>
         

@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function CategoriesBar({ category, setCategory }) {
 
     const [ categoriesInTheBar, setCategoriesInTheBar ] = useState([]);
-    const URL = "http://localhost:4900"
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
     
     useEffect(() => {
         const request = axios.get(`${URL}/categories`);

@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import axios from 'axios';
-import TokenContext from '../../../contexts/TokenContext';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import ChatAllMessages from "./RenderMessages/ChatAllMessages";
 import SendMessage from "./SendMessage/SendMessage";
 
@@ -10,13 +8,11 @@ import SendMessage from "./SendMessage/SendMessage";
 export default function ChatStructure({ otherUserId }) {
     const [ courierInfo, setCourierInfo ] = useState([]);
     const [ updateMessages, setUpdateMessages ] = useState(false);
-    const { token , setToken } = useContext(TokenContext);
-    const navigate = useNavigate();
-    const URL = 'http://localhost:4900'
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
    
 
     useEffect(() => {
-        if(otherUserId !== 'allChats') {
+        if(otherUserId !== 'allChats' && otherUserId !== 'undefined') {
             const courierInfoRequest = axios.get(`${URL}/user/${otherUserId}`);
             courierInfoRequest.then(response => {
             setCourierInfo(response.data)
@@ -24,8 +20,6 @@ export default function ChatStructure({ otherUserId }) {
         }
         
    }, [otherUserId]);
-
-  console.log(otherUserId)
 
 
     function RenderTopChat() {
@@ -49,7 +43,7 @@ export default function ChatStructure({ otherUserId }) {
 
     function RenderAllChatMessages() {
         if(courierInfo.length === 0) {
-            return <></>
+            return <ChatAllMessages />
         } else {
             return ( <ChatAllMessages otherUserId={otherUserId} otherUserPhoto={courierInfo.photo} /> )
         }
@@ -69,7 +63,7 @@ export default function ChatStructure({ otherUserId }) {
 
 const ChatStructureDiv = styled.div`
     width: 1000px;
-    height: 800px;
+    height: 810px;
     display: flex;
     flex-direction: column;
 `
@@ -85,7 +79,7 @@ const TopChat = styled.div`
     border-left: none;
     font-family: proxima-nova, sans-serif;
     z-index: 1;
-    margin-top: 5px;
+    margin-top: 15px;
     border-top-right-radius: 15px;
     box-shadow:  0px 0px 2px 0px;
     border-bottom:none;

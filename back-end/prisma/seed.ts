@@ -27,6 +27,11 @@ async function upsertCategoryItems() {
         update: {},
         create: { name: 'Eletrônicos'}
     });
+    await client.category.upsert({
+        where: { id: 5 },
+        update: {},
+        create: { name: 'Outros'}
+    });
 }
 main()
     .catch(e => {

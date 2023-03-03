@@ -12,7 +12,7 @@ export default function Register() {
     const [cpf, setCpf ] = useState('');
     const [photo, setPhoto ] = useState('');
     const navigator = useNavigate();
-    const URL = 'http://localhost:4900'
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
 
     async function handleSubmit(e) {
         e.preventDefault();

@@ -9,7 +9,7 @@ export default function SideBar() {
     const { token , setToken } = useContext(TokenContext);
     const { user , setUser } = useContext(UserContext);
     const navigate = useNavigate();
-    const URL = 'http://localhost:4900'
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
     const config = {
         headers: {
           Authorization: `Bearer ${token}`,

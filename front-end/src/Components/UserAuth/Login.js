@@ -14,7 +14,7 @@ export default function Login() {
     const { setUser } = useContext(UserContext);
     const { page, setPage } = useContext(PageContext);
     const navigator = useNavigate();
-    const URL = 'http://localhost:4900'
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
 
 
     async function handleSubmit(e) {
@@ -150,3 +150,5 @@ a {
     line-height: 18px;
 }
 `;
+
+//

@@ -1,12 +1,7 @@
 import styled from "styled-components";
-import TopLogo from "../../UsefullComponents/TopLogo"
-import SideBar from "../../UsefullComponents/SideBar";
 import { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import TokenContext from '../../../contexts/TokenContext';
-import ChatStructure from "../ChatStructure/ChatStructure";
-import PageContext from "../../../contexts/PageContext";
 import UserContext from "../../../contexts/UserContext";
 import ChatEachBox from "./ChatEachBox";
 
@@ -15,13 +10,12 @@ export default function AllTheChats({ otherUserId }) {
     const [ users, setUsers ] = useState([]);
     const { token } = useContext(TokenContext);
     const { user } = useContext(UserContext);
-    const URL = 'http://localhost:4900'
+    const URL = 'https://project-22-expo-scambo-back-end.vercel.app'
     const config = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
-      let usersInfo = [];
       
     useEffect(async () => {
         const usersInfo = await gettingUsersInformations();
@@ -108,7 +102,7 @@ const ChatBoxes = styled.div`
     display: flex;
     flex-direction: column;
     background-color: rgb(247, 247, 247);
-    margin-top: 5px;
+    margin-top: 15px;
     border: 1px solid lightgrey;
     height: 795px;
     overflow-y: scroll;
